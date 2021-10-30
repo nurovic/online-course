@@ -1,7 +1,15 @@
+<script>
+export default {
+name:"briefCourse",
+props:["courses"]
+
+}
+</script>
+
 <template>
   <div class="courseIdRightPanel">
       <div class="price-container">
-            <div class="price">$ 30.00</div>
+            <div class="price">$ {{courses.price}}</div>
 
              <button name="button" type="submit" class="button" onclick="alert('Hello world!')">    
                   <span class="price-icon">
@@ -45,7 +53,7 @@
                         </svg>
                     </span>
 
-                    <span class="list-level">Intermediate</span>
+                    <span class="list-level">{{courses.level}}</span>
                 </li>
 
                 <li class="list course-details-list-audio">
@@ -60,11 +68,7 @@
   </div>
 </template>
 
-<script>
-export default {
 
-}
-</script>
 
 <style>
 .price-container     {
