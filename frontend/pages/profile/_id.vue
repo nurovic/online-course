@@ -1,13 +1,49 @@
+
+<script>
+import LessonsVideo from '../../components/lessonsVideo.vue'
+import {mapActions} from "vuex"
+export default {
+    //     async asyncData({$axios, params}){
+    //     try {
+    //         let response = await $axios.$get(`http://localhost:3000/api/courses/${params.id}`)
+    //         console.log(response)
+    //         return {
+    //             courses : response.courses[0]
+    //         }
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // },
+components: {
+    LessonsVideo
+},
+  data() {
+    return {
+      courses: [],
+    };
+  },
+  async mounted() {
+    this.courses = await this.fetchCourses(this.$route.params.id);
+    
+  },
+
+methods: {
+    ...mapActions(['fetchCourses'])
+}
+}
+</script>
+
+
 <template>
 <div >
     <div class="container">
    
 
     <div class="container-left">
-        <h1 class="instructor">Instructor</h1>
+        <h1 class="instructor">{{courses.price}}</h1>
         <b class="name ">Alexander Hanneman</b>
         <br>
-        <h2 class="job ">Web Developer</h2>
+        <h2 class="master">Web Developer</h2>
         <br>
         <br>
 
@@ -59,20 +95,12 @@ I'll be there for you every step of the way.
     </div>
 
 </div>
-    <LessonsVideo    />
+    <LessonsVideo :courses="courses" />
+    
     
     <img src="" alt="">
 </div>
 </template>
-
-<script>
-import LessonsVideo from '../../components/lessons-video.vue'
-export default {
-components: {
-    LessonsVideo
-}
-}
-</script>
 
 <style>
 .container {
@@ -135,7 +163,7 @@ font-size: 40px;
 .container .container-left .about-title{
     font-size: 30px;
  }
-.container .container-left .job{ 
+.container .container-left .master{ 
     margin-top: 10px;
     font-size: 20px;
 }
