@@ -1,3 +1,50 @@
+
+<script>
+import information from "@/components/courseId/information.vue"
+import briefCourse from "@/components/CourseRightPanel/briefCourse.vue"
+import Instructor from "@/components/CourseRightPanel/instructor.vue"
+import courseContent from "@/components/courseId/courseContent.vue"
+import {mapActions} from "vuex"
+
+export default {
+
+    components : {
+    information,
+    briefCourse,
+    Instructor,
+    courseContent
+    
+    
+},
+    data() {
+        return {
+                courses: [],
+                isActive: true ,
+                inActive: false
+        }
+
+},
+
+  async mounted() {
+    this.courses = await this.fetchCourses(this.$route.params.id);
+    
+  },
+
+methods: {
+    ...mapActions(['fetchCourses'])
+},
+
+
+
+
+}   
+
+
+
+</script>
+
+
+
 <template>
   <div class="container">
       <div class="left-right-container">
@@ -23,71 +70,22 @@
             
 
              <information :courses="courses" />
-            <courseContent/>
+            <courseContent :courses="courses" />
       <!-- <div  v-observe-visibility="handleInfinityScroll"></div> -->
       </div>
 
 
       <div  class="right-container">
-          <briefCourse/>
+          <briefCourse :courses="courses" />
           <hr>
           <Instructor/>
           
       </div>
-        
 
       </div>
       
   </div>
 </template>
-
-
-<script>
-import information from "@/components/courseId/information.vue"
-import briefCourse from "@/components/CourseRightPanel/briefCourse.vue"
-import Instructor from "@/components/CourseRightPanel/instructor.vue"
-import courseContent from "@/components/courseId/courseContent.vue"
-
-// import VueObserveVisibility from 'vue-observe-visibility'
-
-
-export default {
-
-    components : {
-    information,
-    briefCourse,
-    Instructor,
-    courseContent
-    
-    
-},
-    async asyncData({$axios, params}){
-        try {
-            let response = await $axios.$get(`http://localhost:3000/api/courses/${params.id}`)
-            console.log(response)
-            return {
-                courses : response.courses[0]
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    },
-
-    data() {
-        return {
-                isActive: true ,
-                inActive: false
-        }
-
-},
-
-
-
-}   
-
-
-
-</script>
 
 
 <style scoped >
