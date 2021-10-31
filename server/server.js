@@ -38,8 +38,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 // require apis
 
 const courseRoutes = require ('./routes/courses')
+const authRoutes = require ('./routes/auth')
 
 app.use("/api", courseRoutes)
+app.use("/api", authRoutes)
 
 app.listen(3000, () => {
     console.log('started listening on 3000')
