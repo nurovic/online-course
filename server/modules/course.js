@@ -7,17 +7,15 @@ const CourseSchema = new Schema ({
     title:String,
     poster:String,
     level:String,
-    movie:Object,
+    movie:String,
     // trailer:String,
     description:String,
     price:Number,
     rating:[],
     category: {type:Schema.Types.ObjectId, ref:"Category"},
-    owner: {type: Schema.Types.ObjectId, ref:"Master"},
+    owner: {type: Schema.Types.ObjectId, ref:"User"},
 
     
 })
-
-// Category genel özele geçecek sekilde olmallı - web development => JS , HTML vs
 
 module.exports = mongoose.model("Course", CourseSchema)

@@ -3,12 +3,12 @@ const Course = require('../modules/course')
 const cloudinary = require("../middlewares/cloudinary");
 const upload = require("../middlewares/multer");
 
-router.post('/courses', upload.array('movie', 2),
+router.post('/courses', upload.single('movie'),
 
 async (req,res)=>{
     try {
         const movie = await cloudinary.uploader.upload(
-            req.files.path,  
+            req.file.path,  
             {resource_type : "video"}
             );
         let course = new Course()
