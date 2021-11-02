@@ -3,7 +3,7 @@
     <div class="navbar">
       <!-- logo -->
       <div class="logo-container">
-        <nuxt-link to="/">
+        <nuxt-link to="/profile">
         <img class="logo" src="../assets/2.png" alt="">
 
         </nuxt-link>
@@ -26,10 +26,21 @@
           <nuxt-link to="/instructor" class="educator">Instructor</nuxt-link>
           <span class="favorite">Favorite</span>
           <!-- <span class="order">Order</span> -->
-          <nuxt-link to="/profile/name" class="account-img-name">
-            <img class="account-img" src="../assets/profile.jpg" alt="">
-            <span class="account-name">Mert</span>
-          </nuxt-link>
+        
+          <template v-if="$auth.loggedIn"> 
+            <nuxt-link to="/profile" class="account-img-name">
+             <img class="account-img" src="../assets/profile.jpg" alt="">
+              <span class="account-name">{{$auth.user.name}}</span>
+            </nuxt-link>
+          </template>
+
+          <template v-else>
+            <nuxt-link to="/signup" class="account-img-name">
+             <img class="account-img" src="../assets/profile.jpg" alt="">
+            <span class="account-name">Hello, Sign in</span>
+           </nuxt-link>
+          </template> 
+          
         </div>
       </div>
 
