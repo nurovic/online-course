@@ -1,39 +1,28 @@
 <script>
 export default {
+    middleware: "auth",
+    auth:"guest",
+    layout:"none",
     data() {
         return {
-            name:"",
             email:"",
             password:"",
         }
     },
 
     methods: {
-        async onUpdateProfile() {
+        async  onLogin() {
             try {
-                let data = {
-                    name: this.name,
-                    email:this.email,
-                    password: this.password
-                }
-                let response = await this.$axios.$put("http://localhost:3000/api/auth/user",data)
-
-                if(response.success) {
-                    this.name = "",
-                    this.email = "",
-                    this.password = ""
-                    await this.$auth.fetchUser()
-                }
-
+                 this.$auth.loginWith("local",{
+                        data: {
+                            email: this.email,
+                            password: this.password
+                        }
+                    })
+                    
+                    this.$router.push("/")
             } catch (err) {
-                
-            }
-        },
-        async onLogout() {
-            try {
-                await this.$auth.logout()
-            } catch (err) {
-                
+                console.log(err);
             }
         }
     }
@@ -48,23 +37,18 @@ export default {
       </nuxt-link>
     </div> -->
     <div class="field course-information">
-      <h1 class="information-title field">Profile Page</h1>
-      <a href="#" @click="onLogout">Logout</a>
-        
-     <div class="field name">
-      <label for="name">name</label>
-      <input class="input" type="name" key="name" v-model="name" :placeholder="$auth.$state.user.name">
-       </div>
+      <h1 class="information-title field">Login</h1>
+
 
     
      <div class="field email">
       <label for="email">E mail</label>
-      <input class="input" type="email" key="email" v-model="email"  :placeholder="$auth.$state.user.email">
+      <input class="input" type="email" key="email" v-model="email">
        </div>
 
        <div class="field password">
       <label for="password">Password</label>
-      <input class="input" type="password" key="password" v-model="password" placeholder="Password">
+      <input class="input" type="password" key="password" v-model="password">
        </div>
     
     
@@ -72,11 +56,16 @@ export default {
 
 
       <div class="field field-button" >
-        <button class="button" type="submit"  @click="onUpdateProfile">Update Profile</button >
+        <button class="button" type="submit"  @click="onLogin">Login</button >
 
       </div>
 
-
+      <div class="login">
+          Don't have an account ?
+          <nuxt-link class="login-button" to="/signup">
+            Sign in
+          </nuxt-link>
+      </div>
        
   
     </div>

@@ -1,39 +1,44 @@
 <script>
 export default {
+     middleware:"auth",
+    auth: "guest",
+    layout:"none",
     data() {
         return {
             name:"",
             email:"",
             password:"",
+            profession: "",
+            about:"",
         }
     },
 
     methods: {
-        async onUpdateProfile() {
+        async  onSignup() {
             try {
                 let data = {
                     name: this.name,
                     email:this.email,
-                    password: this.password
-                }
-                let response = await this.$axios.$put("http://localhost:3000/api/auth/user",data)
+                    password:this.password,
+                    profession: this.profession,
+                    about: this.about
+                };
+                let response = await this.$axios.$post("http://localhost:3000/api/auth/signup", data)
+
+                console.log(response)
 
                 if(response.success) {
-                    this.name = "",
-                    this.email = "",
-                    this.password = ""
-                    await this.$auth.fetchUser()
+                    this.$auth.loginWith("local" ,{
+                        data: {
+                            email: this.email,
+                            password: this.password
+                        }
+                    })
+                    
+                    this.$router.push("/")
                 }
-
             } catch (err) {
-                
-            }
-        },
-        async onLogout() {
-            try {
-                await this.$auth.logout()
-            } catch (err) {
-                
+                console.log(err);
             }
         }
     }
@@ -48,36 +53,58 @@ export default {
       </nuxt-link>
     </div> -->
     <div class="field course-information">
-      <h1 class="information-title field">Profile Page</h1>
-      <a href="#" @click="onLogout">Logout</a>
-        
-     <div class="field name">
-      <label for="name">name</label>
-      <input class="input" type="name" key="name" v-model="name" :placeholder="$auth.$state.user.name">
-       </div>
+      <h1 class="information-title field">Create Account</h1>
 
+
+      <div class=" field projectName">
+        <label for="name">Full Name</label>
+        <input class="input" type="text" key="name" v-model="name">
+      </div>
     
      <div class="field email">
       <label for="email">E mail</label>
-      <input class="input" type="email" key="email" v-model="email"  :placeholder="$auth.$state.user.email">
+      <input class="input" type="email" key="email" v-model="email">
        </div>
 
        <div class="field password">
       <label for="password">Password</label>
-      <input class="input" type="password" key="password" v-model="password" placeholder="Password">
+      <input class="input" type="password" key="password" v-model="password">
        </div>
     
     
     
+    <!-- <div class="field movie">
+       <label for="movie"> Select Lessons </label>
+      <input  type="file" key="movie" multiple  @change="movieFile($event)">
+    </div>
+    -->
 
+       <div class="field profession">
+        <label for="profession">Profession</label>
+        <input class="input" type="text" key="profession" v-model="profession">
+     </div>
+    
+    
+     <br> 
+     <div class="description field">
+         <textarea class="textarea"  placeholder="Write About Yourself" v-model="about"> </textarea>
+      </div>
+ 
 
       <div class="field field-button" >
-        <button class="button" type="submit"  @click="onUpdateProfile">Update Profile</button >
+        <button class="button" type="submit"  @click="onSignup">Create Account</button >
 
       </div>
 
-
-       
+      <div class="login">
+          Already have an account ?
+          <nuxt-link class="login-button" to="/login">
+            Sign in
+          </nuxt-link>
+      </div>
+        <!-- <div class="alert-container">
+            <div class="alert-content">Password must be at least 6 characteres</div>
+        </div> -->
   
     </div>
   </div>

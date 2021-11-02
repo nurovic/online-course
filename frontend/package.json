@@ -11,11 +11,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
     "vue-observe-visibility": "^1.0.0",
-    "vue-sticky-directive": "0.0.10"
+    "vue-sticky-directive": "0.0.10",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
