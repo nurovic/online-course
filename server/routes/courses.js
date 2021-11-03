@@ -1,9 +1,10 @@
 const router = require("express").Router()
 const Course = require('../modules/course')
+const verifyToken = require('../middlewares/verify-token')
 const cloudinary = require("../middlewares/cloudinary");
 const upload = require("../middlewares/multer");
 
-router.post('/courses', upload.single('movie'),
+router.post('/courses', upload.single('movie'), verifyToken,
 
 async (req,res)=>{
     try {
@@ -12,6 +13,8 @@ async (req,res)=>{
             {resource_type : "video"}
             );
         let course = new Course()
+        course.user = req.decoded._id;
+        course.projectName = req.body.projectName
         course.title = req.body.title
         course.level = req.body.level
         course.movie = movie.secure_url
@@ -34,23 +37,25 @@ async (req,res)=>{
 
 // GET
 
-router.get('/courses', async (req,res) => {
+router.get("/courses", verifyToken, async (req,res) =>{
     try {
-        let courses = await Course.find()
-
+        let courses = await Course.find({user: req.decoded._id})
         res.json({
-            success:true,
+            success: true,
             courses: courses
         })
     } catch (err) {
         res.status(500).json({
-            success: false,
+            success:false,
             message: err.message
         })
     }
-})
+});
+
+
+
 // GET request - get a single course
-router.get('/courses/:id', async (req,res) => {
+router.get('/courses/:id', verifyToken, async (req,res) => {
     try {
         let courses = await Course.find({_id: req.params.id})
 
@@ -68,7 +73,7 @@ router.get('/courses/:id', async (req,res) => {
 
 // PUT request
 
-router.put("/courses/:id",upload.single("movie"), async (req,res) => {
+router.put("/courses/:id",upload.single("movie"), verifyToken, async (req,res) => {
     try {
         const movie = await cloudinary.uploader.upload(
             req.file.path,  
@@ -100,9 +105,9 @@ router.put("/courses/:id",upload.single("movie"), async (req,res) => {
     }
 } )
 
-router.delete("/courses/:id", async (req,res) => {
+router.delete("/courses/:id",verifyToken, async (req,res) => {
     try {
-        let deletedCourse = await Course.findOneAndDelete({_id: req.params.id})
+        let deletedCourse = await Course.remove({user: req.decoded._id, _id:req.params.id})
 
         if(deletedCourse){
             res.json({

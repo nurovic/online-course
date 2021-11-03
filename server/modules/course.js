@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const CourseSchema = new Schema ({
+    user: {type:Schema.Types.ObjectId, ref:"User"},
     projectName:String,
     title:String,
     poster:String,
@@ -12,8 +13,7 @@ const CourseSchema = new Schema ({
     description:String,
     price:Number,
     rating:[],
-    category: {type:Schema.Types.ObjectId, ref:"Category"},
-    owner: {type: Schema.Types.ObjectId, ref:"User"},
+    // category: {type:Schema.Types.ObjectId, ref:"Category"},
 
     
 })
