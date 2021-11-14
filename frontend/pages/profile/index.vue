@@ -1,184 +1,169 @@
+
 <script>
+import LessonsVideo from '../../components/lessonsVideo.vue'
+import {mapActions} from "vuex"
 export default {
-    data() {
-        return {
-            name:"",
-            email:"",
-            password:"",
+        async asyncData({$axios, params}){
+        try {
+            let response = await $axios.$get("http://localhost:3000/api/auth/user")
+                console.log(response)
+            return {
+                user: response.user
+            }
+        } catch (err) {
+            console.log(err);
         }
     },
+components: {
+    LessonsVideo
+},
+  data() {
+    return {
+    //   user: [],
+    };
+  },
+  async mounted() {
+    // this.user = await this.fetchUsers();
+    
+  },
 
-    methods: {
-        async onUpdateProfile() {
-            try {
-                let data = {
-                    name: this.name,
-                    email:this.email,
-                    password: this.password
-                }
-                let response = await this.$axios.$put("http://localhost:3000/api/auth/user",data)
-
-                if(response.success) {
-                    this.name = "",
-                    this.email = "",
-                    this.password = ""
-                    await this.$auth.fetchUser()
-                }
-
-            } catch (err) {
-                
-            }
-        },
-        async onLogout() {
-            try {
-                await this.$auth.logout()
-            } catch (err) {
-                
-            }
-        }
-    }
+methods: {
+    // ...mapActions(['fetchUsers'])
+}
 }
 </script>
 
+
 <template>
-  <div class="instructor-container">
-    <!-- <div class="logo-home">
-      <nuxt-link  to="/">
-        <img class="logo" src="../../assets/2.png" alt="">
-      </nuxt-link>
-    </div> -->
-    <div class="field course-information">
-      <h1 class="information-title field">Profile Page</h1>
-      <a href="#" @click="onLogout">Logout</a>
+<div >
+    <div class="container">
         
-     <div class="field name">
-      <label for="name">name</label>
-      <input class="input" type="name" key="name" v-model="name" :placeholder="$auth.$state.user.name">
-       </div>
+    <div class="container-left">
+        <!-- <h1 class="instructor">{{user.name}}</h1> -->
+        <b class="name ">{{user.name}}</b>
+        <br>
+        <h2 class="master">{{user.profession}}</h2>
+        <br>
+        <br>
 
-    
-     <div class="field email">
-      <label for="email">E mail</label>
-      <input class="input" type="email" key="email" v-model="email"  :placeholder="$auth.$state.user.email">
-       </div>
+        <b class="about-title">About</b>
+        <div class="about-text">
+        <p class="about font">
+           
+         {{user.about}}
+         </p>
 
-       <div class="field password">
-      <label for="password">Password</label>
-      <input class="input" type="password" key="password" v-model="password" placeholder="Password">
-       </div>
-    
-    
-    
+        </div>
 
-
-      <div class="field field-button" >
-        <button class="button" type="submit"  @click="onUpdateProfile">Update Profile</button >
-
-      </div>
-
-
-       
-  
+        
     </div>
-  </div>
+     <div class="container-right">
+
+    <div class="profile-photo-container">
+        <div class="profile-photo-img">
+            <img class="profile-photo" src="@/assets/profile-photo.jpeg" alt="">
+            
+        </div>
+        
+    </div>
+
+    <!-- Contant  -->
+    <div class="contant">
+        <div class="contant-button">
+        
+            <a href="#" class="button"> Message</a>
+            <a class="button" href="www.twitter.com">Web Site</a>
+            <a class="button" href="www.twitter.com">Mail</a>
+            <a span class="button" href="www.twitter.com">Youtube</a>
+        </div>
+
+    </div>
+    </div>
+
+</div>
+<!-- <p>{{user.courses[0].price}}</p> -->
+    <LessonsVideo :courses ="user.courses" />
+    
+    
+    <img src="" alt="">
+</div>
 </template>
 
+<style  >
+.container {
+    margin: 10px 200px;
+}
+.profile-photo-container .profile-photo-img .profile-photo {
 
+    border-radius: 68% 32% 45% 55% / 42% 84% 16% 58% ;
+    height: 200px;
+    width: 250px;
+    object-fit:cover;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    
+}
 
-<style scoped>
-.login {
-    font-size:15px ;
+.container-right .contant .contant-button {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    width: 250px;
+    margin-top: 20px;
     align-items: center;
-    padding: 15px;
-    background: rgba(202, 202, 202, 0.144);
-    margin: 5px;
-    border-radius: 50px
+
 }
-.login:hover {
-   background: rgba(78, 140, 255, 0.801);
-   transition: .5s ease-in-out;
-}
-.logo-home {
-  display: block;
-  height: 200px;
-}
-.login-button {
-    height: 20px;
-    align-items: center;
-    font-weight: 600;
-    padding-top:5px ;
-}
-.login-button:hover {
-    font-size: 15px;
-    display: flex;
+
+.container-right .contant .contant-button .button {
+    display: flex; 
     align-items: center;
     justify-content: center;
-    background: #fff;
-    margin-top:5px ;
-    
-    border-radius: 15px;
-    height: 30px;
-    width: 75px;
-    transition: .5s ease-in-out;
+    width: 250px; 
+    height: 600px;
+    /* background: rgba(228, 228, 228, 0.603); */
+    margin: 3px;
+    border: 2px solid rgba(100, 99, 99, 0.096);
+    box-shadow: rgba(0, 0, 0, 0.05  ) 0px 7px 7px, rgba(0, 0, 0, 0.022) 0px 5px 5px;
+
 }
 
-.field-button {
-  align-items: center;
+.container-right .contant .contant-button .button:hover {
+    background: rgba(200, 210, 238, 0.39)
 }
-.button {
-  width: 300px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0);
-  border-radius: 15px;
-  justify-content: center;
-  background: rgba(78, 140, 255, 0.301);
+a {
+    color: black;
 }
-.button:hover {
-  background: rgba(78, 140, 255, 0.801);
-   transition: .5s ease-in-out;
-}
-.input {
-  margin-top:13px ;
-  padding-left:10px ;
-  border-radius: 15px;
-  height: 30px;
-}
-.input::placeholder {
-  text-align: center;
-}
-.course-information {
+
+.container {
     display: flex;
-  flex-direction: column;
-  padding: 5% 0 0 30%;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 30px 40px;
 }
-.textarea {
-  height: 200px;
-  width: 400px;
-}
-.field {
-display: flex;
-flex-direction: column;
-width: 80vh;
-margin: 15px;
-}
-textarea {
-  display: block;
-  resize:none;
-   width: 20%;
-  height: 50%;
 
+
+
+
+.container .container-left .name{
+font-size: 40px;
 }
- input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-  
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
+.container .container-left .about-title{
+    font-size: 30px;
+ }
+.container .container-left .master{ 
+    margin-top: 10px;
+    font-size: 20px;
+}
+.container .container-left .instructor{
+    font-size: 18px;
+    margin-bottom:15px ;
+    font-weight: 500;
+}
+.container .container-left .font{
+    margin: 20px 0;
+    font-size: 20px;    
+}
+.container .container-left .about-text {
+    width: 70%;
+}
 </style>
-
- 
