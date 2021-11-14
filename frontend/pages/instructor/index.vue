@@ -13,10 +13,8 @@ data() {
     level:"",
     description:"",
     movie:null,
-    price:Number
-    // trailer:null
-
-
+    price:Number,
+  
   }
 },
 methods: {
@@ -25,10 +23,7 @@ methods: {
     this.movie = event.target.files[0]
     console.log(this.movie)
   },
-  // trailerFile(event) {
-  //   this.trailer = event.target.files[0]
-  //   console.log(this.trailer)
-  // },
+
   async onAddCourse() {
     let data = new FormData()
     data.append("projectName", this.projectName)
@@ -37,11 +32,9 @@ methods: {
     data.append("description", this.description)
     data.append("movie", this.movie)
     data.append("price", this.price)
-    // data.append("trailer", this.trailer)
-
     let result = await this.$axios.$post('http://localhost:3000/api/courses',data)
     console.log(result)
-    this.$router.push('/profile/name')
+    this.$router.push('/profile')
   }
 }
 }
@@ -49,11 +42,6 @@ methods: {
 
 <template>
   <div class="instructor-container">
-    <!-- <div class="logo-home">
-      <nuxt-link  to="/">
-        <img class="logo" src="../../assets/2.png" alt="">
-      </nuxt-link>
-    </div> -->
     <div class="field course-information">
       <h1 class="information-title field">Create Course</h1>
 
