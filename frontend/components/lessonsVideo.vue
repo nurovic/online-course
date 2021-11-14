@@ -9,9 +9,9 @@ export default {
 <template>
   <div id="lessons-info" class=" container">
     <div id="title-courses">Courses</div>
-    <div class="container-media">
+    <div class="container-media" >
       <!-- multi -->
-      <div class="lesson-container">
+      <div class="lesson-container"  v-for="courses in courses" :key="courses">
       <div class="lesson-container-info">
         <div class="container-poster-video">
           <div class="poster-video">
@@ -20,7 +20,7 @@ export default {
           </div>
           <!--you will auto play when hover -->
             <video class="video" width="300" height="200" controls autoplay>
-            <source src="@/assets/pexels.mp4" type="video/mp4">
+            <source :src="'courses.movie'" type="video/mp4">
           </video> 
           
         </div>  

@@ -3,7 +3,7 @@
     <div class="navbar">
       <!-- logo -->
       <div class="logo-container">
-        <nuxt-link to="/profile">
+        <nuxt-link to="/">
         <img class="logo" src="../assets/2.png" alt="">
 
         </nuxt-link>
@@ -28,10 +28,27 @@
           <!-- <span class="order">Order</span> -->
         
           <template v-if="$auth.loggedIn"> 
-            <nuxt-link to="/profile" class="account-img-name">
-             <img class="account-img" src="../assets/profile.jpg" alt="">
-              <span class="account-name">{{$auth.user.name}}</span>
-            </nuxt-link>
+            <div class="dropdown-container">
+            
+            <ul class="dropdown-container-list">
+              <li>
+                <nuxt-link to="/profile" class="account-img-name">
+                 <img class="account-img" src="../assets/profile.jpg" alt="">
+                <span class="account-name">{{$auth.user.name}}</span>
+               </nuxt-link>
+               <ul>
+                <li class="logout list">
+                 <a href="#" @click="onLogout">Logout</a>
+              </li>
+              <li class="edit-profile list ">
+                <nuxt-link to="/editProfile">
+                  Edit Profile
+                </nuxt-link>
+              </li>
+               </ul>
+              </li>
+            </ul>
+            </div>
           </template>
 
           <template v-else>
@@ -51,20 +68,26 @@
 
 <script>
 export default {
-
+methods: {
+          async onLogout() {
+            try {
+                await this.$auth.logout()
+            } catch (err) {
+                
+            }
+        }
+}
 }
 </script>
 
-<style>
-.navbar-container {
-
-}
+<style >
 .navbar {
   margin: 0 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
 }
 .navbar .logo {
   
@@ -121,7 +144,7 @@ input[type="text"]::placeholder {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* align-items: center; */
+  margin-bottom: 20px;
   
  }
  .navbar .account .account-container .account-img-name .account-img{
@@ -137,4 +160,43 @@ input[type="text"]::placeholder {
  body {
    background: rgba(168, 175, 194, 0.235);
  }
+</style>
+
+<style scoped>
+
+.dropdown-container-list {
+display: flex;
+flex-direction: column;
+}
+.list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 29px;
+  margin: 0 0 15px ;
+  padding: 3px;
+  border-radius: 9px;
+}
+
+ul li ul li:hover {
+  cursor: pointer;
+  background: rgba(78, 140, 255, 0.301);
+}
+ul li ul  {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  display: none;
+}
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
 </style>
