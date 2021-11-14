@@ -9,7 +9,13 @@ const UserSchema = new Schema ({
     Contact:String,
     email:{type: String, unique:true, required:true},
     password:{type: String, unique:true, required:true},
-    courses: {type:Schema.Types.ObjectId, ref:"Course"}
+    courses: [
+        {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
+    autopopulate: { maxDepth: 1 }
+  }
+    ]
 })
 
 UserSchema.pre('save', function(next){
@@ -36,5 +42,7 @@ UserSchema.methods.comparePassword = function (password, next)  {
      let user = this;
      return bcrypt.compareSync(password, user.password)
 }
+
+UserSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model("User", UserSchema)

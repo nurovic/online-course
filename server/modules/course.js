@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 
 const CourseSchema = new Schema ({
-    user: {type:Schema.Types.ObjectId, ref:"User"},
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        autopopulate: { maxDepth: 1 }
+      },
     projectName:String,
     title:String,
     poster:String,
@@ -17,5 +21,7 @@ const CourseSchema = new Schema ({
 
     
 })
+
+CourseSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model("Course", CourseSchema)
