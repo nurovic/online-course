@@ -1,0 +1,7 @@
+module.exports.UserRoutes = require('./Users')
+module.exports.CourseRoutes = require('./Courses')
+module.exports.ProjectRoutes = require('./Projects')
+module.exports.OrderCartRoutes = require('./OrderCart')
+module.exports.MoviesRoutes = require('./Movies')
+module.exports.CategoryRoutes = require('./Category')
+module.exports.LevelRoutes = require('./Level')
