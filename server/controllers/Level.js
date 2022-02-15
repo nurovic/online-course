@@ -6,8 +6,6 @@ class Levels {
         LevelService
         .list()
         .then((response) => {
-            console.log(response)
-            
             res.status(httpStatus.OK).send(response)
         }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
     }

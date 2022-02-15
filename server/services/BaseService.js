@@ -1,4 +1,3 @@
-// BaseModel = null
 class BaseService {
     constructor(model){
         this.model = model
@@ -36,8 +35,8 @@ class BaseService {
     delete(id){
         return this.model.findByIdAndDelete(id)
     }
-    updatelevel(id){
-        return this.model.update(id)
+    removeOrder(){
+        return console.log(this.model.remove())
     }
 }
 

@@ -3,138 +3,139 @@ const CourseService = require("../services/CourseService")
 const ProjectService = require("../services/ProjectService")
 const CategoryService = require("../services/CategoryService")
 const LevelService = require("../services/LevelService")
-const Level = require("../models/Level")
-const UserService = require("../services/UserService")
+const cloudinary = require('../scripts/utilis/cloudinary')
 
 class Course {
-    index(req,res){
-        req.body.user_id = req.user
+    index(req, res) {
         CourseService
-        .list(req.body)
-        .then((response) => {
-            res.status(httpStatus.OK).send(response)
-        }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
+        .list()
+        // .findOne({_id: req.body.user_id._id})
+            .then((response) => {
+                res.status(httpStatus.OK).send(response)
+            }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
     }
-    create(req, res){
+    async create(req, res) {
         req.body.user_id = req.user
-        CourseService
-        .create(req.body)
+        const result =  await cloudinary.uploader.upload(req.files.cover.tempFilePath,  {resource_type : "image", folder:`${req.body.user_id.full_name}/movie/cover`})
+        
+        CourseService.create({course_name: req.body.course_name, file: req.body.file, price: req.body.price, description: req.body.description, category: req.body.category, level:req.body.level, cover:result.secure_url, cover_cloudinary_id: result.public_id, user_id:req.body.user_id },{ new: true })
             .then((response) => {
                 res.status(httpStatus.CREATED).send(response)
-                CategoryService.update({_id: req.body.category}, {$push: { course:  response._id}}).then()
-                LevelService.update({_id: req.body.level}, {$push: { course:  response._id}}).then()
+                CategoryService.update({ _id: req.body.category }, { $push: { course: response._id } }).then()
+                LevelService.update({ _id: req.body.level }, { $push: { course: response._id } }).then()
             })
             .catch((e) => {
                 res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e)
             })
     }
-    
+
     findOne(req, res) {
-        if(!req.params?.id){
+        if (!req.params?.id) {
             return res.status(httpStatus.BAD_REQUEST).send({
-                message:"ID information is missing for Update"
+                message: "ID information is missing for Update"
             })
         }
         CourseService
-            .findOne({_id: req.params.id})
-                .then((course) => {
-                    return res.status(httpStatus.OK).send(course)
-                })
-                .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
+            .findOne({ _id: req.params.id })
+            .then((course) => {
+                return res.status(httpStatus.OK).send(course)
+            })
+            .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
     }
     membersList(req, res) {
-        if(!req.params?.id){
+        if (!req.params?.id) {
             return res.status(httpStatus.BAD_REQUEST).send({
-                message:"ID information is missing for Update"
+                message: "ID information is missing for Update"
             })
         }
         CourseService
-            .findOne({_id: req.params.id})
-                .then((course) => {
-                    console.log(course.members)
-                    return res.status(httpStatus.OK).send(course.members)
-                })
-                .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
+            .findOne({ _id: req.params.id })
+            .then((course) => {
+                return res.status(httpStatus.OK).send(course.members)
+            })
+            .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
     }
 
-    update(req, res ){
-        if(!req.params?.id){
+    update(req, res) {
+        if (!req.params?.id) {
             return res.status(httpStatus.BAD_REQUEST).send({
-                message:"ID information is missing for Update"
+                message: "ID information is missing for Update"
             })
         }
         CourseService.update(req.params?.id, req.body)
-        .then(updatedCourse => {
-            res.status(httpStatus.OK).send(updatedCourse)
-        }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:"Error occured while upadate course"}))
+            .then(updatedCourse => {
+                res.status(httpStatus.OK).send(updatedCourse)
+            }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "Error occured while upadate course" }))
     }
 
-    async deleteCourse(req, res){
-        if(!req.params?.id){return res.status(httpStatus.BAD_REQUEST).send({message:"ID information is missing for Delete"})}
+    async deleteCourse(req, res) {
+        if (!req.params?.id) { return res.status(httpStatus.BAD_REQUEST).send({ message: "ID information is missing for Delete" }) }
 
-        let levelArray = await  CourseService.findOne({_id: req.params.id}).then((crs) =>{ return crs.level.course}) // course array
+        let levelArray = await CourseService.findOne({ _id: req.params.id }).then((crs) => { return crs.level.course }) // course array
         let arrayLevel = levelArray.find(element => element == req.params.id).toString() // find id which equal req.params.id within course array
-        let deleteLevel = await CourseService.findOne({_id: req.params.id}).then(response => {return response.level._id}) // find which level in CourseService
-        let findLevel = await LevelService.findOne({_id : deleteLevel}).then(d => { // find level id in LevelService
-                return  d.course.find(selected => selected._id = arrayLevel)}) // find course which selected
-        
-        LevelService.update({_id:deleteLevel}, {$pull: { course: findLevel}}).then() // delete course which level course array
+        let deleteLevel = await CourseService.findOne({ _id: req.params.id }).then(response => { return response.level._id }) // find which level in CourseService
+        let findLevel = await LevelService.findOne({ _id: deleteLevel }).then(d => { // find level id in LevelService
+            return d.course.find(selected => selected._id = arrayLevel)
+        }) // find course which selected
 
-        let courseArray = await  CourseService.findOne({_id: req.params.id}).then((ctg) =>{ return ctg.category.course})
+        LevelService.update({ _id: deleteLevel }, { $pull: { course: findLevel } }).then() // delete course which level course array
+
+        let courseArray = await CourseService.findOne({ _id: req.params.id }).then((ctg) => { return ctg.category.course })
         let arrayCourse = courseArray.find(element => element == req.params.id).toString()
-        let deleteCategory = await CourseService.findOne({_id: req.params.id}).then(response => {return response.category._id})
-        let findCategory = await CategoryService.findOne({_id : deleteCategory}).then(category => {
-            return  category.course.find(selected => selected._id = arrayCourse)
+        let deleteCategory = await CourseService.findOne({ _id: req.params.id }).then(response => { return response.category._id })
+        let findCategory = await CategoryService.findOne({ _id: deleteCategory }).then(category => {
+            return category.course.find(selected => selected._id = arrayCourse)
         })
-        CategoryService.update({_id:deleteCategory}, {$pull: { course: findCategory}}).then()
+        CategoryService.update({ _id: deleteCategory }, { $pull: { course: findCategory } }).then()
 
         await CourseService.delete(req.params?.id)
-        .then((deleteCourse) => {
-            if(!deleteCourse) {return res.status(httpStatus.NOT_FOUND).send({message:"This course not found"})}
-            res.status(httpStatus.OK).send({message:"Course Deleted"})
-        }).catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:"Error occured while delete course"}))
+            .then((deleteCourse) => {
+                if (!deleteCourse) { return res.status(httpStatus.NOT_FOUND).send({ message: "This course not found" }) }
+                res.status(httpStatus.OK).send({ message: "Course Deleted" })
+            }).catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "Error occured while delete course" }))
 
     }
 
-    projectList(req, res){
+    projectList(req, res) {
         ProjectService
-            .list({course_id : req.params.id})
-                .then(projects => {
-                    res.status(httpStatus.OK).send(projects)
-                })
-                .catch((e) =>(httpStatus.INTERNAL_SERVER_ERROR).send({error:"error occured"}))
+            .list({ course_id: req.params.id })
+            .then(projects => {
+                res.status(httpStatus.OK).send(projects)
+            })
+            .catch((e) => (httpStatus.INTERNAL_SERVER_ERROR).send({ error: "error occured" }))
     }
 
-    makeComment(req, res){
+    makeComment(req, res) {
+        // const { id } = req.params
         CourseService
-            .findOne({_id: req.params.id})
-                .then(courseTask => {
-                    const comment = {
-                        ...req.body,
-                        commented_at: new Date(),
-                        user_id: req.user
-                    }
-                    courseTask.comments.push(comment)
-                    courseTask.save()
-                    .then((commented)=> {
+            .findOne({ _id: req.params.id })
+            .then(courseTask => {
+                const comment = {
+                    ...req.body,
+                    commented_at: new Date(),
+                    user_id: req.user
+                }
+                courseTask.comments.push(comment)
+                courseTask.save()
+                    .then((commented) => {
                         return res.status(httpStatus.OK).send(commented)
                     })
-                        .catch(e => res.status(INTERNAL_SERVER_ERROR).send({error: "Error occured while comment"}))
-                })
+                    .catch(e => res.status(INTERNAL_SERVER_ERROR).send({ error: "Error occured while comment" }))
+            })
     }
 
-    deleteComment(req, res){
+    deleteComment(req, res) {
         CourseService
-        .findOne({_id: req.params.id})
+            .findOne({ _id: req.params.id })
             .then(mainCourse => {
                 // if(!mainCourse) return res.status(httpStatus.NOT_FOUND).send({message: "This comment not found"})
-                mainCourse.comments = mainCourse.comments.filter((d) => { return d._id.toString() != req.params.commentId})
+                mainCourse.comments = mainCourse.comments.filter((d) => { return d._id.toString() != req.params.commentId })
                 mainCourse
-                .save()
-                .then((update) => {
+                    .save()
+                    .then((update) => {
                         return res.status(httpStatus.OK).send(update)
-                })
-                .catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:"comment deleted"}))
+                    })
+                    .catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ message: "comment deleted" }))
             })
     }
 }

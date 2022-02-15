@@ -1,20 +1,5 @@
 const Mongoose = require("mongoose")
 
-// const OrderSchema = new Mongoose.Schema(
-//      {        
-//       course_id: {
-//           type: Mongoose.Schema.Types.ObjectId,
-//           ref:'course',
-//           autopopulate:{maxDepth:1, select:"_id full_name price description"}
-//       },
-//       full_name: String,
-//       price: String
-         
-// }
-// )
-
-// const order = Mongoose.model("order", OrderSchema)
-
 
 
 const OrderCartSchema = new Mongoose.Schema({
@@ -22,7 +7,7 @@ const OrderCartSchema = new Mongoose.Schema({
         {
         type: Mongoose.Schema.Types.ObjectId,
         ref:'course',
-        autopopulate:{maxDepth:2, select:"course_name, user_id price, full_name, "},
+        autopopulate:{maxDepth:1, select:"course_name price cover"},
         }
 ,   
     user_id:
@@ -31,7 +16,6 @@ const OrderCartSchema = new Mongoose.Schema({
         ref:'user',
         autopopulate:{maxDepth:1, select:"full_name"}
         },
-        desc: String
         
 
 },
@@ -42,27 +26,3 @@ const OrderCartSchema = new Mongoose.Schema({
 OrderCartSchema.plugin(require('mongoose-autopopulate'))
 module.exports = Mongoose.model("ordercart", OrderCartSchema)
 
-
-// module.exports = {order, orderCart}
-// const OrderCart = new Mongoose.Schema({
-//     price: String,
-//     course_id:[
-//             {
-//                 course_id: {
-//                     type: Mongoose.Schema.Types.ObjectId,
-//                     ref:'course',
-//                     autopopulate:{maxDepth:1, select:"_id full_name price description"}
-//                 }
-//             }
-//         ],
-//         user_id:
-//         {
-//         type: Mongoose.Schema.Types.ObjectId,
-//         ref:'user',
-//         autopopulate:{maxDepth:1, select:"full_name"}
-//         },
-        
-
-// },
-// {timestamps: true, versionKey:false}
-// )
