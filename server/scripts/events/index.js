@@ -5,7 +5,6 @@ module.exports = () => {
 
   
     eventEmitter.on("send_email", async (emailData) => {
-      // console.log(emailData)
         let transporter = nodemailer.createTransport(
           smtpTransport({
           service:process.env.EMAIL_SERVICE,
@@ -19,7 +18,6 @@ module.exports = () => {
           requireTLS: true
           })
           );
-          // console.log("email DAta bilgiler", emailData)
           let info = await transporter.sendMail({
             from: process.env.EMAIL_FROM, // sender address
             ...emailData
@@ -27,16 +25,9 @@ module.exports = () => {
           });
 
 
-          
-  // console.log("kod 20. satır",info.messageId);
-  // console.log("Message sent: %s",info.messageId);
-  process.stdin.resume();
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-  // Preview only available when sending through an Ethereal account
-  // console.log("kod 25. satır", nodemailer.getTestMessageUrl(info));
-  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  process.stdin.resume();
+
     });
     
     

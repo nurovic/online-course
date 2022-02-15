@@ -1,61 +1,93 @@
-const httpStatus = require("http-status")
-const {ordercart, order} = require("../models/Courses")
-const CourseService = require("../services/CourseService")
-const ProjectService = require("../services/ProjectService")
-const UserService = require("../services/UserService")
-const OrderCartService = require("../services/OrderCartService")
+const httpStatus = require("http-status");
+const CourseService = require("../services/CourseService");
+const UserService = require("../services/UserService");
+const OrderCartService = require("../services/OrderCartService");
 
 // const OrderCart = require("../models/OrderCart")
 class OrderCart {
-    index(req,res){
-        req.body.user_id = req.user
-        OrderCartService
-        .list(req.body)
-        .then((response) => {
-            res.status(httpStatus.OK).send(response)
-        }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
-    }
+  index(req, res) {
+    req.body.user_id = req.user;
+    OrderCartService.list(req.body)
+      .then((response) => {
+        res.status(httpStatus.OK).send(response);
+      })
+      .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e));
+  }
 
-    async create(req, res) {
-        req.body.user_id = req.user
+  create(req, res) {
+    req.body.user_id = req.user;
+    OrderCartService.create(req.body)
+      .then((response) => {
+        res.status(httpStatus.CREATED).send(response);
+      })
+      .catch((e) => {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e);
+      });
+  }
 
-        OrderCartService
-            .create(req.body)
-            .then((response) => {                
-                UserService.update({_id: req.user._id}, {$push: { learnings: req.body.course_id}}).then()
-                CourseService.findOne({_id: req.body.course_id}).then((a) => { //find course
-                    let members = a._id.toString() // find course id
-                    let userId = req.body.user_id._id.toString()
-                    CourseService.update({_id: members}, {$push: { members: userId}}).then() // pushed members to course
-                })              
-                res.status(httpStatus.CREATED).send(response)
-            })
-            .catch((e) => {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e)
-                
-            })
-    }
+  async checkout(req, res) {
+    const { totalAmount, course_name, course_id } = req.body;
 
-    deleteOrder(req, res){
-        OrderCartService.delete(req.params?.id)
-        .then((deleteOrder) => {
-            if(!deleteOrder) {
-                return res.status(httpStatus.NOT_FOUND).send({
-                    message:"This order not found"
-                })
-            }
-            res.status(httpStatus.OK).send({
-                message:"Order Deleted"
-            })
-        }).catch(e => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:"Error occured while delete order"}))
-    }
+    // UserService.update(
+    //   { _id: req.user._id },
+    //   { $push: { learnings: course_id } }
+    // ).then();
 
-    payment(req,res) {
-        // will initialize Stripe after frontEnd    
-        // https://github.dev/sk-Jahangeer/node-stripe-payment-gateway    
-        //https://github.dev/safak/youtube/blob/node-shop-api/routes/stripe.js
-    }
+    // for (let i = 0; i < course_id.length; i++) {
+    //   const userId = req.user._id
+    //         CourseService.update(
+    //         { _id: course_id[i] },
+    //         { $push: { members: userId } }
+    //       )
+    //       .then()
+
+    // };
+    OrderCartService.removeOrder()
+    // try {
+    //   // Create Checkout Sessions from body params.
+    //   const session = await stripe.checkout.sessions.create({
+    //     payment_method_types: ["card"],
+    //     line_items: [
+    //       {
+    //         price_data: {
+    //           currency: "usd",
+    //           product_data: {
+    //             name: course_name,
+    //           },
+    //           unit_amount: parseInt(totalAmount) * 100,
+    //         },
+    //         quantity: 1,
+    //       },
+    //     ],
+    //     mode: "payment",
+    //     success_url: "http://localhost:8080/",
+    //     cancel_url: "http://localhost:8080/",
+    //   });
+    //   res.send({ url: session.url });
+    // } catch (err) {
+    //   res.status(500).json({ statusCode: 500, message: err.message });
+    // }
+  }
+
+  deleteOrder(req, res) {
+    OrderCartService.delete(req.params?.id)
+      .then((deleteOrder) => {
+        if (!deleteOrder) {
+          return res.status(httpStatus.NOT_FOUND).send({
+            message: "This order not found",
+          });
+        }
+        res.status(httpStatus.OK).send({
+          message: "Order Deleted",
+        });
+      })
+      .catch((e) =>
+        res
+          .status(httpStatus.INTERNAL_SERVER_ERROR)
+          .send({ message: "Error occured while delete order" })
+      );
+  }
 
 }
 
-module.exports = new OrderCart()
+module.exports = new OrderCart();

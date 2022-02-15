@@ -3,7 +3,7 @@ const Mongoose = require("mongoose")
 const ProjectSchema = new Mongoose.Schema({
     project_file: String,
     comment: String,
-    user_id:
+    createdBy:
         {
         type: Mongoose.Schema.Types.ObjectId,
         ref:'user',

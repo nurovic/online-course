@@ -7,7 +7,7 @@ const CategorySchema = new Mongoose.Schema(
                 {
                 type: Mongoose.Schema.Types.ObjectId,
                 ref:'course',
-                autopopulate:{maxDepth:1, select:"course_name user_id"}
+                autopopulate:{maxDepth:1, select:"course_name user_id price cover"}
                 }
             ],
         },

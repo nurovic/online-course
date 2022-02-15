@@ -12,18 +12,13 @@ class Movies{
         }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
     }
     async create(req, res){
+
         req.body.user_id = req.user
+        
         const result =  await cloudinary.uploader.upload(req.files.movie.tempFilePath,  {resource_type : "video", folder:`${req.body.user_id.full_name}/movie`})
-        // const result =  await cloudinary.uploader.upload(req.files.movie)
-        // console.log("result",result) // gets video documantion
-        await MoviesService
-        .create({title: req.body.title, movie:result.secure_url, cloudinary_id: result.public_id})
-            .then((response) => {
-                res.status(httpStatus.CREATED).send(response)
-            })
-            .catch((e) => {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e)
-            })
+
+        const response = await MoviesService.create({title: req.body.title, movie:result.secure_url, cloudinary_id: result.public_id})
+        res.status(httpStatus.CREATED).send(response)
     }
     findOne(req, res) {
         if(!req.params?.id){

@@ -7,7 +7,8 @@ const router = express.Router()
  
 
 router.route("/").get(authenticate, ProjectController.index)
-router.route("/").post(authenticate, validate(schemas.createValidation), ProjectController.create)
+// router.route("/").post(authenticate, validate(schemas.createValidation), ProjectController.create)
+router.route("/").post(authenticate, ProjectController.create)
 router.route("/:id").patch(authenticate, validate(schemas.updateValidation), ProjectController.update)
 router.route("/:id").delete(authenticate, ProjectController.deleteProject)
 
