@@ -1,19 +1,18 @@
 
 <script>
-import { mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "lessonsVideo",
   data() {
     return {
       isLoading: true,
-      courses: [],
     };
   },
-  methods: {
-    ...mapActions("courses", ["fetchCourses"]),
-  },
+computed:{
+...mapState("user", ["courses"])
+},
   async mounted() {
-    this.courses = await this.fetchCourses();
+    await this.courses;
     this.isLoading = false;
   },
 };

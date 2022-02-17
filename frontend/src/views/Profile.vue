@@ -11,8 +11,6 @@ export default {
   },
   data() {
     return {
-      // isLoading: true,
-      // user: [],
       courses: [],
       selectedComponent: "LessonsVideo",
     };
@@ -21,10 +19,6 @@ export default {
   computed: {
     ...mapState("user", ["profile_image"])
   },
-  // async mounted() {
-  //   this.user = await this.login();
-  //   this.isLoading = false
-  // },
 };
 </script>
 

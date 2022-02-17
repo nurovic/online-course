@@ -2,6 +2,7 @@ const httpStatus = require("http-status")
 const CourseService = require("../services/CourseService")
 const ProjectService = require("../services/ProjectService")
 const CategoryService = require("../services/CategoryService")
+const UserService = require("../services/UserService")
 const LevelService = require("../services/LevelService")
 const cloudinary = require('../scripts/utilis/cloudinary')
 
@@ -23,6 +24,7 @@ class Course {
                 res.status(httpStatus.CREATED).send(response)
                 CategoryService.update({ _id: req.body.category }, { $push: { course: response._id } }).then()
                 LevelService.update({ _id: req.body.level }, { $push: { course: response._id } }).then()
+                UserService.update({_id: req.user._id }, {$push: {created_courses: response._id}}).then()
             })
             .catch((e) => {
                 res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e)
