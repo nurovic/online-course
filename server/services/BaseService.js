@@ -35,9 +35,6 @@ class BaseService {
     delete(id){
         return this.model.findByIdAndDelete(id)
     }
-    removeOrder(){
-        return console.log(this.model.remove())
-    }
 }
 
 module.exports = BaseService
