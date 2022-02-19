@@ -21,7 +21,10 @@ app.use(helmet())
 app.use(fileUpload({
     useTempFiles:true
 }))
-app.use(cors())
+app.use(cors({
+    origin:true,
+    credentials:true
+}))
 
 app.listen(process.env.APP_PORT, ()=> {
     console.log("Working")
