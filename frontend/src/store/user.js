@@ -11,7 +11,8 @@ const mutations = {
     SET_TOKEN: 'setToken',
     SET_PROFILE_IMAGE:'setProfileImage',
     INITAUTH:"initAuth",
-    SET_COURSES:"setCourses"
+    SET_COURSES:"setCourses",   
+    SET_LEARNINGS:"setLearnings"
 }
 
 const actions = {
@@ -24,7 +25,8 @@ const user = {
         user_name: "",
         token:"",
         profile_image:"",
-        courses:[]
+        courses:[],
+        learnings:[]
     },
     mutations: {
         [mutations.SET_USER](state, user) {
@@ -38,7 +40,10 @@ const user = {
         },
         [mutations.SET_COURSES](state, courses){
             state.courses = courses
-        }
+        },
+        [mutations.SET_LEARNINGS](state, learnings){
+            state.learnings = learnings            
+            }
     },
     actions: {
         initAuth({commit}){
@@ -56,7 +61,8 @@ const user = {
             commit("setToken", user.data.tokens.access_token)
             commit(mutations.SET_PROFILE_IMAGE, user.data)
             commit(mutations.SET_COURSES,user.data.created_courses);
-            localStorage.setItem("token",  JSON.stringify(user.data.tokens.access_token) )
+            commit(mutations.SET_LEARNINGS, user.data.learnings)
+            localStorage.setItem("token",  JSON.stringify(user.data.tokens.access_token))
         }
     },
     modules: {

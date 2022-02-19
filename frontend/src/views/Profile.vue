@@ -27,7 +27,7 @@ export default {
   <div>
     <div class="container">
       <div class="container-left">
-        <b class="name">User name</b>
+        <b class="name"></b>
         <br />
         <h2 class="master">Proffesion</h2>
         <br />
