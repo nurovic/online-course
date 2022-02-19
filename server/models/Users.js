@@ -6,6 +6,8 @@ const UserSchema = new Mongoose.Schema(
     password: String,
     email: String,
     profile_image: String,
+    profession: String,
+    about: String,
     learnings: [
       {
         type: Mongoose.Schema.Types.ObjectId,

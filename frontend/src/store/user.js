@@ -16,7 +16,8 @@ const mutations = {
 }
 
 const actions = {
-    LOGIN: 'login'
+    LOGIN: 'login',
+    SIGNUP:"signup"
 }
 
 const user = {
@@ -62,8 +63,12 @@ const user = {
             commit(mutations.SET_PROFILE_IMAGE, user.data)
             commit(mutations.SET_COURSES,user.data.created_courses);
             commit(mutations.SET_LEARNINGS, user.data.learnings)
-            localStorage.setItem("token", JSON.stringify(user.data.tokens.access_token))
+            localStorage.setItem("token",  JSON.stringify(user.data.tokens.access_token) )
+        },
+        async [actions.SIGNUP](_, signup){
+            await axios.post("/users", signup)
         }
+
     },
     modules: {
     }
