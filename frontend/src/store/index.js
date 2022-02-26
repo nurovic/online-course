@@ -9,10 +9,9 @@ import movies from './movies'
 import levels from './levels'
 import order from './order'
 
+let token = JSON.parse(localStorage.getItem("token"))
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-// const z = axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')`;
-// const z = axios.defaults.headers.common['Authorization'] = "Bearer" + localStorage.getItem("token") ;
-// console.log(z)
 axios.defaults.baseURL = 'http://localhost:3000'
 Vue.use(Vuex)
 
