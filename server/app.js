@@ -4,7 +4,6 @@ const helmet = require ('helmet')
 const loaders = require("./loaders")
 const events = require("./scripts/events")
 const fileUpload = require("express-fileupload")
-// const path = require("path")
 const {UserRoutes, CourseRoutes, ProjectRoutes, OrderCartRoutes, MoviesRoutes, CategoryRoutes, LevelRoutes } = require("./api-routes")
 const cors = require('cors')
 
@@ -15,7 +14,6 @@ events()
 
 
 const app = express()
-// app.use("/uploads", express.static(path.join(__dirname,"./", "uploads")))
 app.use(express.json())
 app.use(helmet())
 app.use(fileUpload({

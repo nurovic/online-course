@@ -11,6 +11,7 @@ router.route("/").patch(authenticate,validate(schemas.updateValidation), UserCon
 router.route("/change-password").post(authenticate, validate(schemas.changePasswordValidation), UserController.changePassword)
 router.route("/reset-password").post(UserController.resetPassword)  
 router.route("/update-profile-image").post(authenticate, UserController.updateProfileImage)
+router.route("/profile").get(authenticate, UserController.profile)
 
 
 // router.route("/order-carts").get(authenticate, UserController.orderCarts)

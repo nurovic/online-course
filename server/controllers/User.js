@@ -11,6 +11,13 @@ const cloudinary = require("../scripts/utilis/cloudinary");
 // const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
 class User {
+  profile(req,res){
+    UserService
+    .findOne({_id: req.user._id})
+    .then((response) => {
+        res.status(httpStatus.CREATED).send(response)
+    }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
+  }
   create(req, res) {
     req.body.password = passwordToHash(req.body.password);
     UserService.create(req.body)
@@ -39,17 +46,16 @@ class User {
             refresh_token: generateRefreshToken(user),
           },
         };
-        // const  {email, password}  = user;
-        // const payload = {
-        //   email,
-        //   password,
-        // };
-        // let token = jwt.sign(payload, process.env.SECRET, {
-        //   expiresIn: 604800,
-        // });
-        // res.json({ success: true, token });
         delete user.password;
-        res.status(httpStatus.OK).send(user);
+        res.status(httpStatus.OK).send(
+          user
+          // {
+          // _id: user._id,
+          // full_name: user.full_name,
+          // email: user.email,
+          // token: user.tokens
+        // }
+        );
       })
       .catch((e) =>
         res

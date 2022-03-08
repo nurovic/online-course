@@ -9,9 +9,12 @@ import movies from './movies'
 import levels from './levels'
 import order from './order'
 
+<<<<<<< Updated upstream
+=======
 let token = JSON.parse(localStorage.getItem("token"))
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
+>>>>>>> Stashed changes
 axios.defaults.baseURL = 'http://localhost:3000'
 Vue.use(Vuex)
 

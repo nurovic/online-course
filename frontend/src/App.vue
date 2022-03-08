@@ -1,7 +1,17 @@
 <script>
+// import axios from "axios"
 export default {
+<<<<<<< Updated upstream
   created() {
-    this.$store.dispatch('user/initAuth');
+    // this.$store.dispatch('user/initAuth');
+=======
+   created() {
+     this.$store.dispatch('user/profile')
+        //  this.$store.dispatch('user/initAuth');
+    // const token = localStorage.getItem('token')
+    // const a = axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    // console.log(a);
+>>>>>>> Stashed changes
   },
 };
 </script>

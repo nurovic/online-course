@@ -67,6 +67,15 @@ const user = {
         },
         async [actions.SIGNUP](_, signup){
             await axios.post("/users", signup)
+        },
+        async profile({commit}){
+            const profile = await axios.get('/users/profile')
+            console.log(profile.data);
+        //    commit(mutations.SET_USER, profile.data)
+           commit(mutations.SET_PROFILE_IMAGE, profile.data)
+           commit(mutations.SET_COURSES,profile.data.created_courses);
+           commit(mutations.SET_LEARNINGS, profile.data.learnings)
+           
         }
 
     },
