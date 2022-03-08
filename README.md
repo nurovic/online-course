@@ -1,6 +1,6 @@
 # online-course
 
-![profile](images-files/1.PNG)
+![profile](./images-files/1.PNG)
 ![profile](images-files/2.PNG)
 ![profile](images-files/3.PNG)
 ![profile](images-files/4.PNG)
