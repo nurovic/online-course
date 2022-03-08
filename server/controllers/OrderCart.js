@@ -2,8 +2,8 @@ const httpStatus = require("http-status");
 const CourseService = require("../services/CourseService");
 const UserService = require("../services/UserService");
 const OrderCartService = require("../services/OrderCartService");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// const OrderCart = require("../models/OrderCart")
 class OrderCart {
   index(req, res) {
     req.body.user_id = req.user;
@@ -28,45 +28,44 @@ class OrderCart {
   async checkout(req, res) {
     const { totalAmount, course_name, course_id } = req.body;
 
-    // UserService.update(
-    //   { _id: req.user._id },
-    //   { $push: { learnings: course_id } }
-    // ).then();
+    UserService.update(
+      { _id: req.user._id },
+      { $push: { learnings: course_id } }
+    ).then();
 
-    // for (let i = 0; i < course_id.length; i++) {
-    //   const userId = req.user._id
-    //         CourseService.update(
-    //         { _id: course_id[i] },
-    //         { $push: { members: userId } }
-    //       )
-    //       .then()
+    for (let i = 0; i < course_id.length; i++) {
+      const userId = req.user._id
+            CourseService.update(
+            { _id: course_id[i] },
+            { $push: { members: userId } }
+          )
+          .then()
 
-    // };
-    OrderCartService.removeOrder()
-    // try {
-    //   // Create Checkout Sessions from body params.
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ["card"],
-    //     line_items: [
-    //       {
-    //         price_data: {
-    //           currency: "usd",
-    //           product_data: {
-    //             name: course_name,
-    //           },
-    //           unit_amount: parseInt(totalAmount) * 100,
-    //         },
-    //         quantity: 1,
-    //       },
-    //     ],
-    //     mode: "payment",
-    //     success_url: "http://localhost:8080/",
-    //     cancel_url: "http://localhost:8080/",
-    //   });
-    //   res.send({ url: session.url });
-    // } catch (err) {
-    //   res.status(500).json({ statusCode: 500, message: err.message });
-    // }
+    };
+    try {
+      // Create Checkout Sessions from body params.
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: course_name,
+              },
+              unit_amount: parseInt(totalAmount) * 100,
+            },
+            quantity: 1,
+          },
+        ],
+        mode: "payment",
+        success_url: "http://localhost:8080/",
+        cancel_url: "http://localhost:8080/",
+      });
+      res.send({ url: session.url });
+    } catch (err) {
+      res.status(500).json({ statusCode: 500, message: err.message });
+    }
   }
 
   deleteOrder(req, res) {
