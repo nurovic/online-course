@@ -177,6 +177,8 @@ body {
   flex-direction: row;
   border: 2px solid rgba(0, 0, 0, 0.144);
   border-radius: 5px;
+  margin-left:30px ;
+
 }
 .list-detail {
   display: flex;

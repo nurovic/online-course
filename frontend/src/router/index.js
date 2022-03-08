@@ -12,7 +12,6 @@ import Profile from '../views/Profile.vue'
 import Instructor from '../views/Instructor.vue'
 import Navbar from "../components/Navbar.vue"
 import CourseNavbar from "../components/CourseNavbar.vue"
-import Stripe from "../components/Stripe.vue"
 import LogIn from "../views/LogIn.vue"
 import SignUp from "../views/SignUp.vue"
 
@@ -21,14 +20,6 @@ import SignUp from "../views/SignUp.vue"
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/stripe',
-    name: 'Stripe',
-    components:  {
-      default: Stripe,
-      "navbar": Navbar
-    }
-  },
   {
     path: '/',
     name: 'Home',
