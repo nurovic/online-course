@@ -1,6 +1,6 @@
 # online-course
 
-![profile](https://github.com/nurovic/online-course/blob/main/image-files/1.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/main/image-files/2.PNG?raw=true)
 ![profile](image-files/2.PNG)
 ![profile](image-files/3.PNG)
 ![profile](image-files/4.PNG)
