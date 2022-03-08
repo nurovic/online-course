@@ -2,7 +2,7 @@
 
 ![profile](https://github.com/nurovic/online-course/blob/main/image-files/1.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image-files/2.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/main/image-files/3.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/main/image-files/3.png?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image-files/4.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image-files/5.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image-files/6.PNG?raw=true)
