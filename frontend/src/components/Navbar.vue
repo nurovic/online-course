@@ -11,12 +11,17 @@ export default {
   },
   methods: {
     ...mapActions("courses", ["fetchCourses"]),
+    ...mapActions("user", ["logout"]),
+    async logOut() {
+      await this.logout()
+      
+    }
   },
   async mounted() {
     this.filtered = await this.fetchCourses();
   },
   computed: {
-    ...mapState("user",["profile_image","user_name"]),
+    ...mapState("user", ["profile_image", "user_name"]),
     filteredPosts() {
       if (!this.search) {
         return [];
@@ -60,7 +65,9 @@ export default {
             >
               <div class="list-detail">
                 <span class="course-name">
-                  <a :href="`/courses/${course._id}`"> {{ course.course_name }}</a>
+                  <a :href="`/courses/${course._id}`">
+                    {{ course.course_name }}</a
+                  >
                 </span>
               </div>
             </ul>
@@ -77,11 +84,30 @@ export default {
           <router-link to="/order-list" class="order">Order</router-link>
           <template>
             <router-link
-            v-if="user_name"
-             to="/profile" class="account-img-name">
-              <img v-if="profile_image" class="account-img" :src="this.profile_image" alt="" />
-              <img  v-else class="account-img" src="../assets/profile.jpg" alt="" />
-              <span class="account-name">{{user_name}}</span>
+              v-if="user_name"
+              to="/profile"
+              class="account-img-name"
+            >
+              <ul>
+                <li>
+                  <img
+                    v-if="profile_image"
+                    class="account-img"
+                    :src="this.profile_image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="account-img"
+                    src="../assets/profile.jpg"
+                    alt=""
+                  />
+                  <span class="account-name">{{ user_name }}</span>
+                  <ul>
+                    <li class="ul_li" @click="logOut">Log Out</li>
+                  </ul>
+                </li>
+              </ul>
             </router-link>
             <router-link v-else to="/signup" class="account-img-name">
               <img class="account-img" src="../assets/profile.jpg" alt="" />
@@ -163,6 +189,11 @@ body {
 </style>
 
 <style scoped>
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
 .filter-container {
   position: absolute;
   left: 320px;
@@ -177,13 +208,12 @@ body {
   flex-direction: row;
   border: 2px solid rgba(0, 0, 0, 0.144);
   border-radius: 5px;
-  margin-left:30px ;
-
+  margin-left: 30px;
 }
 .list-detail {
   display: flex;
   flex-direction: row;
-  font-size:20px;
+  font-size: 20px;
   font-weight: 800;
 }
 .dropdown-container-list {
@@ -214,12 +244,18 @@ ul li ul {
 
 ul li:hover > ul,
 ul li ul:hover {
+  display: flex;
+  margin-right:20px;
   visibility: visible;
   opacity: 1;
+  width: 8em;
   display: block;
 }
 ul li ul li {
   clear: both;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 </style>

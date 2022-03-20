@@ -18,6 +18,7 @@ export default {
       try {
         await this.login(this.user);
         this.$router.push("/profile")
+         location.reload()
       } catch (err) {
         console.log(err);
       }

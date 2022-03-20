@@ -8,7 +8,7 @@ const UserService = require("../services/UserService");
 const uuid = require("uuid");
 const eventEmitter = require("../scripts/events/eventEmitter");
 const cloudinary = require("../scripts/utilis/cloudinary");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
 class User {
   profile(req,res){
@@ -30,7 +30,17 @@ class User {
           .send({ message: "Error occurred while creating user" });
       });
   }
-
+  logout(req, res) {
+    const refreshToken = req.headers["authorization"];
+    // const refreshToken = req.headers("x-auth-token");
+    const payload = {
+      "sub": "1234567890",
+      "name": "John Doe",
+      "iat": 1516234022
+    }
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET_KEY, {expiresIn:'1'})
+  }
+  
   login(req, res) {
     req.body.password = passwordToHash(req.body.password);
     UserService.findOne(req.body)
@@ -48,13 +58,13 @@ class User {
         };
         delete user.password;
         res.status(httpStatus.OK).send(
-          user
-          // {
-          // _id: user._id,
-          // full_name: user.full_name,
-          // email: user.email,
-          // token: user.tokens
-        // }
+          // user
+          {
+          _id: user._id,
+          full_name: user.full_name,
+          email: user.email,
+          token: user.tokens
+        }
         );
       })
       .catch((e) =>
