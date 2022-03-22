@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { router } from "../router"
 
 
 Vue.use(Vuex)
@@ -35,6 +34,7 @@ const user = {
         },
         setToken(state, token) {
             state.token = token
+            localStorage.setItem('token', token)
         },
         [mutations.SET_PROFILE_IMAGE](state, profile_image) {
             state.profile_image = profile_image.profile_image
@@ -44,39 +44,38 @@ const user = {
         },
         [mutations.SET_LEARNINGS](state, learnings){
             state.learnings = learnings            
-            }
+            },
+        // Log_Out(state,)
     },
     actions: {
-        initAuth({commit}){
-            let token = JSON.parse(localStorage.getItem("token"))
-            if(token){
-                commit("setToken", token)
-            }else {
-                router.push("/auth")
-                return false
+
+        async [actions.LOGIN]({ commit, dispatch }, login) {
+            const user = await axios.post('/users/login', login)
+            console.log(user.data)
+            commit('setToken', user.data.token.access_token)
+        },
+
+        async getToken({commit, dispatch}) {
+            try {
+                const getToken =  await localStorage.getItem('token')
+                axios.defaults.headers.common['Authorization'] = `Bearer ${getToken}`
+                commit('setToken', getToken)
+                let profile = await axios.get('/users/profile')
+                commit(mutations.SET_PROFILE_IMAGE, profile.data)
+                commit(mutations.SET_USER, profile.data)
+                commit(mutations.SET_COURSES,profile.data.created_courses);
+                commit(mutations.SET_LEARNINGS, profile.data.learnings)
+            } catch (error) {
+                console.log("error", error)
             }
         },
-        async [actions.LOGIN]({ commit }, login) {
-            const user = await axios.post('/users/login', login)
-            commit(mutations.SET_USER, user.data)
-            commit("setToken", user.data.tokens.access_token)
-            commit(mutations.SET_PROFILE_IMAGE, user.data)
-            commit(mutations.SET_COURSES,user.data.created_courses);
-            commit(mutations.SET_LEARNINGS, user.data.learnings)
-            localStorage.setItem("token",  JSON.stringify(user.data.tokens.access_token) )
+        async logOut({commit}){
+            commit('Log_Out', null)
         },
-        async [actions.SIGNUP](_, signup){
-            await axios.post("/users", signup)
+        logout(){
+            axios.defaults.headers.common['Authorization'] = ''
+            localStorage.clear()
         },
-        async profile({commit}){
-            const profile = await axios.get('/users/profile')
-            console.log(profile.data);
-        //    commit(mutations.SET_USER, profile.data)
-           commit(mutations.SET_PROFILE_IMAGE, profile.data)
-           commit(mutations.SET_COURSES,profile.data.created_courses);
-           commit(mutations.SET_LEARNINGS, profile.data.learnings)
-           
-        }
 
     },
     modules: {

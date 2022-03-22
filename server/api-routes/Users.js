@@ -12,10 +12,8 @@ router.route("/change-password").post(authenticate, validate(schemas.changePassw
 router.route("/reset-password").post(UserController.resetPassword)  
 router.route("/update-profile-image").post(authenticate, UserController.updateProfileImage)
 router.route("/profile").get(authenticate, UserController.profile)
+router.route("/logout").put(authenticate, UserController.logout)
 
-
-// router.route("/order-carts").get(authenticate, UserController.orderCarts)
-// router.route("/projects").get(authenticate, UserController.projectList)
 
 router.route("/login").post(validate(schemas.loginValidation), UserController.login)
 

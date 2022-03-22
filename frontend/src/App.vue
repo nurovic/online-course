@@ -1,8 +1,7 @@
 <script>
-// import axios from "axios"
 export default {
   created() {
-    // this.$store.dispatch('user/initAuth');
+    this.$store.dispatch('user/getToken');
   },
 };
 </script>
