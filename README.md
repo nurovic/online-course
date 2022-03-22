@@ -58,18 +58,18 @@
 
     npm run serve
     
-https://github.com/nurovic/online-course/blob/updated/images/1.PNG?raw=true
-![profile](https://github.com/nurovic/online-course/blob/updated/images/1.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/2.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/3.png?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/4.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/5.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/6.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/7.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/8.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/9.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/10.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/11.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/12.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/13.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/images/14.PNG?raw=true)
+
+![profile](https://github.com/nurovic/online-course/blob/updated/image/1.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/2.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/3.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/4.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/5.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/6.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/7.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/8.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/9.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/10.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/11.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/12.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/13.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/updated/image/14.PNG?raw=true)
