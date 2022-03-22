@@ -1,5 +1,3 @@
-
-
 #Installation
 
 1- Clone this repo.
@@ -60,7 +58,7 @@
 
     npm run serve
     
-
+https://github.com/nurovic/online-course/blob/updated/images/1.PNG?raw=true
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/1.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/2.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/3.png?raw=true)
@@ -75,4 +73,3 @@
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/12.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/13.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/images/14.PNG?raw=true)
-
