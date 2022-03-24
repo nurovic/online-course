@@ -14,7 +14,7 @@ import Navbar from "../components/Navbar.vue"
 import CourseNavbar from "../components/CourseNavbar.vue"
 import LogIn from "../views/LogIn.vue"
 import SignUp from "../views/SignUp.vue"
-
+import store from "../store"
 
 
 Vue.use(VueRouter)
@@ -50,6 +50,14 @@ const routes = [
     components: {
       default: OrderList,
       "navbar": Navbar
+    },
+    beforeEnter: (to, from, next) => {
+      if(localStorage.token.length < 5) {
+       return next({
+         name: 'LogIn'
+       })
+      }
+      next()
     }
   },
   {
@@ -83,6 +91,14 @@ const routes = [
     components: {
       default: Projects,
       "navbar": Navbar
+    },
+    beforeEnter: (to, from, next) => {
+      if(localStorage.token.length < 5) {
+       return next({
+         name: 'LogIn'
+       })
+      }
+      next()
     }
   },
   {
@@ -99,6 +115,14 @@ const routes = [
     components: {
       default: Instructor,
       "navbar": Navbar
+    },
+    beforeEnter: (to, from, next) => {
+      if(localStorage.token.length < 5) {
+       return next({
+         name: 'LogIn'
+       })
+      }
+      next()
     }
   },
   {
