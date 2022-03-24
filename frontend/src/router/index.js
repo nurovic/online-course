@@ -1,129 +1,150 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import CoursesId from '../views/CoursesId.vue'
-import Courses from '../views/Courses.vue'
-import VideoWatch from '../views/VideoWatch.vue'
-import Projects from '../views/Projects.vue'
-import EditProfile from '../views/EditProfile.vue'
-import ResetPassword from '../views/ResetPassword.vue'
-import OrderList from '../views/OrderList.vue'
-import Profile from '../views/Profile.vue'
-import Instructor from '../views/Instructor.vue'
-import Navbar from "../components/Navbar.vue"
-import CourseNavbar from "../components/CourseNavbar.vue"
-import LogIn from "../views/LogIn.vue"
-import SignUp from "../views/SignUp.vue"
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import CoursesId from "../views/CoursesId.vue";
+import Courses from "../views/Courses.vue";
+import VideoWatch from "../views/VideoWatch.vue";
+import Projects from "../views/Projects.vue";
+import EditProfile from "../views/EditProfile.vue";
+import ResetPassword from "../views/ResetPassword.vue";
+import OrderList from "../views/OrderList.vue";
+import Profile from "../views/Profile.vue";
+import Instructor from "../views/Instructor.vue";
+import Navbar from "../components/Navbar.vue";
+import CourseNavbar from "../components/CourseNavbar.vue";
+import LogIn from "../views/LogIn.vue";
+import SignUp from "../views/SignUp.vue";
+import store from "../store";
 
-
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    components:  {
+    path: "/",
+    name: "Home",
+    components: {
       default: Home,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/courses/:id',
-    name: 'CourseId',
+    path: "/courses/:id",
+    name: "CourseId",
     components: {
       default: CoursesId,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/courses',
-    name: 'Courses',
+    path: "/courses",
+    name: "Courses",
     components: {
       default: Courses,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/order-list',
-    name: 'OrderList',
+    path: "/order-list",
+    name: "OrderList",
     components: {
       default: OrderList,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.token.length < 5) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
+    },
   },
   {
-    path: '/edit-profile',
-    name: 'EditProfile',
+    path: "/edit-profile",
+    name: "EditProfile",
     components: {
       default: EditProfile,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/reset-password',
-    name: 'ResetPassword',
+    path: "/reset-password",
+    name: "ResetPassword",
     components: {
       default: ResetPassword,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/video-watch',
-    name: 'VideoWatch',
+    path: "/video-watch",
+    name: "VideoWatch",
     components: {
       default: VideoWatch,
-      "course-navbar":CourseNavbar
-
-    }
+      "course-navbar": CourseNavbar,
+    },
   },
   {
-    path: '/projects',
-    name: 'Projects',
+    path: "/projects",
+    name: "Projects",
     components: {
       default: Projects,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.token.length < 5) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
+    },
   },
   {
-    path: '/profile',
-    name: 'Profile',
+    path: "/profile",
+    name: "Profile",
     components: {
       default: Profile,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/instructor',
-    name: 'Instructor',
+    path: "/instructor",
+    name: "Instructor",
     components: {
       default: Instructor,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.token.length < 5) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
+    },
   },
   {
-    path: '/login',
-    name: 'LogIn',
+    path: "/login",
+    name: "LogIn",
     components: {
       default: LogIn,
-      "navbar": Navbar
-    }
+      navbar: Navbar,
+    },
   },
   {
-    path: '/signup',
-    name: 'SignUp',
+    path: "/signup",
+    name: "SignUp",
     components: {
       default: SignUp,
-      "navbar": Navbar
-    }
-  }
-
-]
+      navbar: Navbar,
+    },
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
