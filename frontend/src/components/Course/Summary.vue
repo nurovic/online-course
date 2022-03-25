@@ -12,7 +12,6 @@ export default {
   },
     async mounted() {
     this.course = await this.fetchCoursesId(this.$route.params.id);
-
   },
 };
 </script>
@@ -20,9 +19,9 @@ export default {
 
 <template>
   <div class="information-container">
-    <div class="video-container">
-      <video class="video" width="100%" height="20%" controls>
-        <source :src="course.file[0].movie" type="video/mp4">
+    <div class="video-container" v-for="mv in this.course.file" :key="mv.id">
+      <video class="video" width="100%" height="20%" controls >
+        <source :src="mv.movie" type="video/mp4">
       </video>
     </div>
 
@@ -47,7 +46,6 @@ export default {
 }
 
 .info-text-container {
-  /* background:red; */
   padding: 30px 0;
 }
 .text-area {

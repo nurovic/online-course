@@ -1,5 +1,5 @@
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 export default {
   data(){
     return{
@@ -11,7 +11,10 @@ export default {
     async sendComment(){
       await this.makeComment({id:this.$route.params.id, comment: this.comment})
     }
-  }
+  },
+    computed: {
+    ...mapState("user", ["user"]),
+  },
 };
 </script>
 
@@ -20,7 +23,7 @@ export default {
       <div class="profil">
         <img
           class="image-field"
-          src="@/assets/profile-photo.jpeg"
+          :src="user.profile_image"
           alt=""
           aria-placeholder="Wtire"
         />

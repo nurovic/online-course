@@ -37,11 +37,8 @@ export default {
               </div>
             </div>
           </div>
-
           <div class="container-info-text">
             <div class="info-text">
-              <!-- <span class="name">{{user.name}}</span> -->
-
               <span class="name">{{ learning.name }}</span>
 
               <router-link
@@ -50,11 +47,7 @@ export default {
               >
                 <span class="name">{{ learning.course_name }}</span>
               </router-link>
-
               <span class="rating"></span>
-
-              <!-- <span class="price">$ {{courses.price}}</span> -->
-
               <span class="price">$ {{ learning.price }}</span>
             </div>
           </div>

@@ -97,8 +97,6 @@ export default {
 
       <div class="field level">
         <span>Level</span>
-        <!-- <Dropdown v-if="levels.length > 0" :options="levels" :isLevel="true" /> -->
-
         <select class="input" v-model="selectedLevel">
           <option v-for="level in levels" :key="level._id" :value="level._id">
             {{ level.level }}
@@ -108,8 +106,6 @@ export default {
 
       <div class="field category">
         <span>Category</span>
-        <!-- <Dropdown :options="categories" :isLevel="false" v-model="selected" /> -->
-
         <select class="input" v-model="selectedCategory">
           <option
             v-for="category in categories"

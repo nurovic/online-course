@@ -1,22 +1,29 @@
 <script>
+import { mapActions } from "vuex"
 export default {
 name:"briefCourse",
-props:["course"]
-
+props:["course"],
+methods: {
+    ...mapActions("order", ["addOrders"]),
+    
+    async order(id){
+    await this.addOrders(id)
+      
+    }
+  },
 }
 </script>
-
 <template>
   <div class="courseIdRightPanel">
       <div class="price-container">
             <div class="price">$ {{course.price}}</div>
-             <button name="button" type="submit" class="button" onclick="alert('Hello world!')">    
+             <button name="button" type="submit" class="button" >    
                   <span class="price-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" id="icon-size" class="icon-size h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                     </svg>
                   </span>
-                  <div class="price-buy">Add Order</div>
+                  <div class="price-buy" @click="order(course._id)" >Add Order</div>
              </button>
           </div>
 

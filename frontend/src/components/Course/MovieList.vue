@@ -6,12 +6,10 @@ props:["courses"]
 </script>
 
 <template>
-  <div class="content-container">fsds
-    <!-- <div class="content-container-panel" v-for="lesson in courses" :key="lesson"> -->
+  <div class="content-container">
     <div class="content-container-panel">
       <div class="content-container-panel-left-right">
          <div class="content-left-container">
-            <!-- <div class="content-lesson-title">{{courses.title}}</div> -->
             <div class="content-lesson-title">course title2</div>
           </div>
           
