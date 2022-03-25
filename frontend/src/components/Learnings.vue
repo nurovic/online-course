@@ -17,7 +17,6 @@ export default {
   async mounted() {
     await this.learnings;
     this.isLoading = false;
-    console.log(this.learnings);
   },
 };
 </script>

@@ -21,7 +21,12 @@ export default {
       this.orders = await this.fetchOrders();
     },
     async sendOrder() {
-      await this.buyCourse(this.stripe);
+      if(this.itemLength == 0) {
+        return alert("Firstly Add Course")
+      }else{
+        await this.buyCourse(this.stripe);
+
+      }
     },
     async deleteOrder(id) {
       await this.removeOrder(id);
@@ -30,16 +35,20 @@ export default {
   },
   computed: {
     ...mapState("order", ["cart"]),
+    ...mapState("order", ["itemLength"]),
   },
   async mounted() {
     await this.updateOrders();
+    if(this.itemLength == 0 ){
+      return this.isLoading = false
+    }else {
     this.isLoading = false;
     this.stripe.totalAmount = this.cart;
     this.stripe.course_name = this.orders.map(
       (name) => name.course_id.course_name
     ).toString();
-    console.log("seese", this.orders.map(id => id.course_id._id));
     this.stripe.course_id = this.orders.map(id => id.course_id._id)
+      }
   },
 };
 </script>
@@ -48,7 +57,10 @@ export default {
     <h1>Order List</h1>
     <div v-if="isLoading">Please wait...</div>
     <div v-else class="order-detail">
-      <div class="projects-list">
+      <div v-if="this.itemLength == 0" class="projects-list">
+        <h1 class="no-order">No Order...</h1>
+        </div>
+      <div v-else class="projects-list">
         <div class="projects" v-for="order in orders" :key="order._id">
           <div class="img-container">
             <img :src="order.course_id.cover" alt="" />
@@ -63,7 +75,8 @@ export default {
       <div class="payment-container">
         <div class="payment-detail">
           <span class="total-title">Total:</span>
-          <span class="total">{{ cart }}$</span>
+          <span v-if="this.itemLength == 0" class="total">0$</span>
+          <span v-else class="total">{{ cart }}$</span>
 
           <button @click="sendOrder">PAYMENT</button>
         </div>
@@ -154,5 +167,9 @@ button {
   font-size: 30px;
   font-weight: 800;
   margin-top: 20px;
+}
+.no-order{
+  display: flex;
+  justify-content: center;
 }
 </style>

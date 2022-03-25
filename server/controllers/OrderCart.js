@@ -68,6 +68,15 @@ class OrderCart {
     }
   }
 
+  deleteAll(req,res){
+    OrderCartService.deleteAll()
+      .then((deleteAll) => {
+        res.status(httpStatus.OK).send({
+          message: "Order Deleted",
+        });
+      })
+  }
+
   deleteOrder(req, res) {
     OrderCartService.delete(req.params?.id)
       .then((deleteOrder) => {
