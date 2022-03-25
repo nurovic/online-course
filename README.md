@@ -60,7 +60,7 @@
     
 
 ![profile](https://github.com/nurovic/online-course/blob/updated/image/1.PNG?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/updated/image/2.PNG?raw=true)
+![profile](https://github.com/nurovic/online-course/blob/main/image/2.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/image/3.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/image/4.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/updated/image/5.PNG?raw=true)
