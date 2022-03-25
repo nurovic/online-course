@@ -60,9 +60,9 @@ export default {
   <div class="container">
     <transition name="fade" mode="in-out">
       <div v-show="seen" class="navbar-scroll">
-        <div class="navbar-movie">
+        <div class="navbar-movie"  v-for="mv in this.course.file" :key="mv.id">
           <video class="video" poster width="11%" height="25%" controls>
-            <source :src="course.file[0].movie" type="video/mp4" />
+            <source :src="mv.movie" type="video/mp4" />
           </video>
           <div class="navbar-course-detail">
             <span>{{ course.description }}</span>

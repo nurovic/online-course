@@ -21,7 +21,7 @@ export default {
     this.filtered = await this.fetchCourses();
   },
   computed: {
-    ...mapState("user", ["profile_image", "user_name"]),
+    ...mapState("user", ["user"]),
     filteredPosts() {
       if (!this.search) {
         return [];
@@ -84,16 +84,16 @@ export default {
           <router-link to="/order-list" class="order">Order</router-link>
           <template>
             <router-link
-              v-if="user_name"
+              v-if="user.full_name"
               to="/profile"
               class="account-img-name"
             >
               <ul>
                 <li>
                   <img
-                    v-if="profile_image"
+                    v-if="user.profile_image"
                     class="account-img"
-                    :src="this.profile_image"
+                    :src="this.user.profile_image"
                     alt=""
                   />
                   <img
@@ -102,7 +102,7 @@ export default {
                     src="../assets/profile.jpg"
                     alt=""
                   />
-                  <span class="account-name">{{ user_name }}</span>
+                  <span class="account-name">{{ user.full_name }}</span>
                   <ul>
                     <li class="ul_li" @click="logOut">Log Out</li>
                   </ul>

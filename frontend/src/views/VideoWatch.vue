@@ -6,7 +6,7 @@
     <div class="video-container">
       <div class="video-player">
         <video class="video" controls>
-          <source src="../assets/pexels.mp4" type="video/mp4" />
+          <source src="" type="video/mp4" />
         </video>
       </div>
     </div>

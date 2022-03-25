@@ -38,7 +38,7 @@ export default {
       :key="comment.id"
     >
       <div class="image">
-        <img class="image-field" src="@/assets/profile-photo.jpeg" alt="" />
+        <img class="image-field" :src="comment.user_id.profile_image" alt="" />
       </div>
       <div class="info-comment">
         <div class="user-name">{{ comment.user_id.full_name }}</div>

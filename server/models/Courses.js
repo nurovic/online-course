@@ -26,7 +26,7 @@ const CourseSchema = new Mongoose.Schema({
             user_id: {
                 type: Mongoose.Schema.Types.ObjectId,
                 ref: 'user',
-                autopopulate: { maxDepth: 2, select: "full_name email profil_image" }
+                autopopulate: { maxDepth: 2, select: "full_name email profile_image" }
             },
         }
 
