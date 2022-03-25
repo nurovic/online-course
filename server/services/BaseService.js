@@ -35,6 +35,9 @@ class BaseService {
     delete(id){
         return this.model.findByIdAndDelete(id)
     }
+    deleteAll(){
+        return this.model.deleteMany({})
+    }
 }
 
 module.exports = BaseService
