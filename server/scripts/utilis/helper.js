@@ -6,10 +6,10 @@ const passwordToHash = (password) => {
 }
 
 const generateAccesToken = (user) => {
-    return JWT.sign({name: user.email, ...user}, process.env.ACCESS_TOKEN_SECRET_KEY, {expiresIn: "1w"})
+    return JWT.sign({user_id: user._id}, process.env.ACCESS_TOKEN_SECRET_KEY, {expiresIn: "1w"})
 }
 const generateRefreshToken = (user) => {
-    return JWT.sign({name: user.email, ...user}, process.env.REFRESH_TOKEN_SECRET_KEY)
+    return JWT.sign({user_id: user._id}, process.env.REFRESH_TOKEN_SECRET_KEY)
 }
 
 module.exports = {

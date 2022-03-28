@@ -6,7 +6,7 @@ const events = require("./scripts/events")
 const fileUpload = require("express-fileupload")
 const {UserRoutes, CourseRoutes, ProjectRoutes, OrderCartRoutes, MoviesRoutes, CategoryRoutes, LevelRoutes } = require("./api-routes")
 const cors = require('cors')
-
+const morgan = require('morgan')
 
 config()
 loaders()
@@ -15,6 +15,7 @@ events()
 
 const app = express()
 app.use(express.json())
+app.use(morgan("dev"))
 app.use(helmet())
 app.use(fileUpload({
     useTempFiles:true
