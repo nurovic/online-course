@@ -9,6 +9,10 @@ class BaseService {
     findOne(id){
         return this.model.findOne(id)
     }
+
+    findOneById(id){
+        return this.model.findById(id)
+    }
     deleteOne(id){
         return this.model.deleteOne(id)
     }

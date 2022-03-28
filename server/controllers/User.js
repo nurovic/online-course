@@ -8,15 +8,14 @@ const UserService = require("../services/UserService");
 const uuid = require("uuid");
 const eventEmitter = require("../scripts/events/eventEmitter");
 const cloudinary = require("../scripts/utilis/cloudinary");
-const jwt = require("jsonwebtoken");
-const stripe = require("stripe")(process.env.STRIPE_SECRETKEY);
+
 class User {
   profile(req,res){
     UserService
     .findOne({_id: req.user._id})
     .then((response) => {
         res.status(httpStatus.CREATED).send(response)
-    }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
+    }).catch((e) => console.log("hata burada", e, req.user))
   }
   create(req, res) {
     req.body.password = passwordToHash(req.body.password);
@@ -29,16 +28,6 @@ class User {
           .status(httpStatus.INTERNAL_SERVER_ERROR)
           .send({ message: "Error occurred while creating user" });
       });
-  }
-  logout(req, res) {
-    const refreshToken = req.headers["authorization"];
-    // const refreshToken = req.headers("x-auth-token");
-    const payload = {
-      "sub": "1234567890",
-      "name": "John Doe",
-      "iat": 1516234022
-    }
-    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET_KEY, {expiresIn:'1'})
   }
   
   login(req, res) {
@@ -120,7 +109,6 @@ class User {
   }
 
   changePassword(req, res) {
-    // compare old password
     req.body.password = passwordToHash(req.body.password);
 
     UserService.update(req.user?._id, req.body)
