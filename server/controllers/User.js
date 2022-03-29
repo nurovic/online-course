@@ -15,7 +15,7 @@ class User {
     .findOne({_id: req.user._id})
     .then((response) => {
         res.status(httpStatus.CREATED).send(response)
-    }).catch((e) => console.log("hata burada", e, req.user))
+    }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
   }
   create(req, res) {
     req.body.password = passwordToHash(req.body.password);
@@ -121,12 +121,6 @@ class User {
           .send({ error: "Error occured while update" })
       );
   }
-
-  addLearning(res, req) {
-    let x = res.body.course_id;
-    UserService.update(req.user?._id, x).then((updatedUser) => {});
-  }
-
   resetPassword(req, res) {
     const new_password =
       uuid.v4().split("-")[0] || `usr-${new Date().getTime()}`;

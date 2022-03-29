@@ -9,13 +9,16 @@ const mutations = {
     SET_TOKEN: 'setToken',
     SET_COURSES:"setCourses",   
     SET_LEARNINGS:"setLearnings",
-    SET_USER:"setUser"
+    SET_USER:"setUser",
 }
 
 const actions = {
+    LOG_OUT:"logOut",
     LOGIN: 'login',
     SIGNUP:"signup",
-    PROFIL_PHOTO:"profilPhoto"
+    PROFIL_PHOTO:"profilPhoto",
+    SING_UP:"singUp",
+    GET_TOKEN:"getToken"
 }
 
 const user = {
@@ -43,30 +46,34 @@ const user = {
     },
     actions: {
         
-        async [actions.LOGIN]({ commit, dispatch }, login) {
+        async [actions.LOGIN]({ commit}, login) {
             const user = await axios.post('/users/login', login)
             commit('setToken', user.data.token.access_token)
         },
         async [actions.PROFIL_PHOTO](_, photo) {
             await axios.post("/users/update-profile-image", photo)
         },
-        async getToken({commit}) {
+        async [actions.GET_TOKEN]({commit}) {
             try {
                 const getToken =  await localStorage.getItem('token')
                 axios.defaults.headers.common['Authorization'] = `Bearer ${getToken}`
-                commit('setToken', getToken)
-                let profile = await axios.get('/users/profile')
-                commit("setUser", profile.data)
-                commit(mutations.SET_COURSES,profile.data.created_courses);
+                commit(mutations.SET_TOKEN, getToken)
+                const profile = await axios.get('/users/profile')
+                commit(mutations.SET_USER, profile.data)
+                commit(mutations.SET_COURSES, profile.data.created_courses);
                 commit(mutations.SET_LEARNINGS, profile.data.learnings)
             } catch (error) {
-                console.log("error", error)
+                console.log("error1", error)
             }
         },
-        logout(){
+        [actions.LOG_OUT](){
             axios.defaults.headers.common['Authorization'] = ''
             localStorage.clear()
+            window.location.href = "http://localhost:8080/"
         },
+        async [actions.SING_UP](_, singup){
+           await axios.post('/users', singup)
+        }
 
     },
     modules: {

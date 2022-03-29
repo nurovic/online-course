@@ -17,7 +17,6 @@ export default {
   },
   methods: {
     ...mapActions("user", ["profilPhoto"]),
-
     async onFileSelectedCover(event) {
       this.profileImage = await event.target.files[0];
       await this.sendPhoto()
@@ -66,7 +65,8 @@ export default {
       <div class="container-right">
         <div class="profile-photo-container">
           <div class="profile-photo-img">
-            <img class="profile-photo" :src="this.user.profile_image" alt="" />
+            <img v-if="user.profile_image" class="profile-photo" :src="this.user.profile_image" alt="" />
+            <img v-else class="profile-photo" src="../assets/profile.jpg" alt="" />
             <div class="image-upload">
               <label for="file-input">
               <svg

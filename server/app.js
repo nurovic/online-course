@@ -25,13 +25,13 @@ app.use(cors({
     credentials:true
 }))
 
-app.listen(process.env.APP_PORT, ()=> {
+app.listen(process.env.APP_PORT || 3000, ()=> {
     console.log("Working")
     app.use("/users", UserRoutes)
-app.use("/courses", CourseRoutes)
-app.use("/projects", ProjectRoutes)
-app.use("/order-cart", OrderCartRoutes)
-app.use("/movies", MoviesRoutes)
-app.use("/category", CategoryRoutes)
-app.use("/level", LevelRoutes)
+    app.use("/courses", CourseRoutes)
+    app.use("/projects", ProjectRoutes)
+    app.use("/order-cart", OrderCartRoutes)
+    app.use("/movies", MoviesRoutes)
+    app.use("/category", CategoryRoutes)
+    app.use("/level", LevelRoutes)
 })

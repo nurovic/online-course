@@ -14,7 +14,7 @@ import Navbar from "../components/Navbar.vue";
 import CourseNavbar from "../components/CourseNavbar.vue";
 import LogIn from "../views/LogIn.vue";
 import SignUp from "../views/SignUp.vue";
-import store from "../store";
+
 
 Vue.use(VueRouter);
 

@@ -46,7 +46,7 @@ const order = {
       });
       dispatch('deleteAll')
     },
-    async deleteAll(req,res) {
+    async deleteAll() {
       await axios.post("/order-cart/delete-many")
     }
   },
