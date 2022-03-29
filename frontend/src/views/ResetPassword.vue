@@ -1,6 +1,20 @@
 <script>
+import {mapActions} from "vuex"
+
 export default {
   name:"ResetPassword",
+  data() {
+    return {
+      email:""
+    }
+  },
+  methods: {
+    ...mapActions("user",["reset_password"]),
+
+    resetPassword() {
+      this.reset_password(this.email)
+    }
+  } 
 }
 </script>
 
@@ -11,13 +25,11 @@ export default {
       
      <div class="field email">
       <label for="email">E mail</label>
-      <input class="input" type="email" key="email" v-model="email"  >
-      <!-- <input class="input" type="email" key="email" v-model="email"  :placeholder="$auth.$state.user.email"> -->
-       </div>
+      <input class="input" type="email" key="email" v-model="email"  >       </div>
 
 
       <div class="field field-button" >
-        <button class="button" type="submit"  @click="onUpdateProfile">Reset Password</button >
+        <button class="button" type="submit"  @click="resetPassword">Reset Password</button >
       </div>
     </div>
   </div>
