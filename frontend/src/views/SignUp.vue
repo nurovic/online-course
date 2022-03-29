@@ -13,10 +13,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions("user", ["singup"]),
+    ...mapActions("user", ["singUp"]),
     async submitSingnUp() {
       try {
-        await this.singup(this.userinfo)
+        await this.singUp(this.userinfo)
         this.$router.push("/login")
         
       } catch (error) {

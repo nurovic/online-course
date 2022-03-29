@@ -11,10 +11,10 @@ export default {
   },
   methods: {
     ...mapActions("courses", ["fetchCourses"]),
-    ...mapActions("user", ["logout"]),
-    async logOut() {
-      await this.logout()
-      
+    ...mapActions("user", ["logOut"]),
+    
+    signout() {
+      this.logOut()
     }
   },
   async mounted() {
@@ -104,7 +104,7 @@ export default {
                   />
                   <span class="account-name">{{ user.full_name }}</span>
                   <ul>
-                    <li class="ul_li" @click="logOut">Log Out</li>
+                    <li class="ul_li" @click="signout">Log Out</li>
                   </ul>
                 </li>
               </ul>

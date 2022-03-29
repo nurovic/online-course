@@ -71,11 +71,14 @@ export default {
 .comment-field {
   display: flex;
   background-color: rgba(223, 223, 223, 0.267);
-  height: auto;
+  height: 90px;
   width: 90%;
   border: 1px solid rgba(0, 0, 0, 0.212);
   border-radius: 15px;
   margin-top: 20px;
+}
+.image {
+  width: 6em;
 }
 .image-field {
   margin: 10px 0 0 10px;
