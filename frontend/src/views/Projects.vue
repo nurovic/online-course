@@ -33,17 +33,18 @@ export default {
           <img :src="project.project_file" alt="" />
         </div>
         <div class="projects-detail">
-          <div class="course-name" v-for="course in project.course_id" :key="course._id">
-            <router-link :to="`/courses/${course._id}`">{{ course.course_name }}</router-link>
+          <div class="course-name" >
+            <router-link :to="`/courses/${project.course_id._id}`">Course: {{project.course_id.course_name}}</router-link>
           </div>
           <div class="project-description">
-            {{ project.comment }}
+          Comment: {{ project.comment }}
           </div>
+        </div>
           <span @click="deleteProject(project._id)" class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               id="icon-size"
-              class="h-6 w-6"
+              class="h-6 w-6 icon-color"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -56,7 +57,6 @@ export default {
               />
             </svg>
           </span>
-        </div>
       </div>
       <div class="edit-panel"></div>
     </div>
@@ -87,12 +87,16 @@ export default {
 .img-container {
   /* width: 35em; */
 }
+.icon-color:hover{
+  fill: gray;
+}
 img {
   object-fit: cover;
-  width: 100%;
+  width: 200px;
   height: 100%;
 }
 .projects-detail {
+  width: 90%;
   padding-left: 20px;
 }
 .course-name {
