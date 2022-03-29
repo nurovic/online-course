@@ -18,7 +18,8 @@ const actions = {
     SIGNUP:"signup",
     PROFIL_PHOTO:"profilPhoto",
     SING_UP:"singUp",
-    GET_TOKEN:"getToken"
+    GET_TOKEN:"getToken",
+    RESET_PASSWORD:"reset_password",
 }
 
 const user = {
@@ -73,6 +74,9 @@ const user = {
         },
         async [actions.SING_UP](_, singup){
            await axios.post('/users', singup)
+        },
+        async [actions.RESET_PASSWORD](_, password) {
+            await axios.post("/users/reset-password", {email: password})
         }
 
     },

@@ -13,7 +13,7 @@ router.route("/reset-password").post(UserController.resetPassword)
 router.route("/update-profile-image").post(authenticate, UserController.updateProfileImage)
 router.route("/profile").get(authenticate, UserController.profile)
 
-router.route("/login").post(validate(schemas.loginValidation), UserController.login)
+router.route("/login").post(UserController.login)
 
 router.route("/:id").delete( UserController.deleteUser)
 

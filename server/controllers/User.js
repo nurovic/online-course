@@ -132,21 +132,21 @@ class User {
         if (!updatedUser)
           return res
             .status(httpStatus.NOT_FOUND)
-            .send({ error: "Böyle bir kullanıcı bulunamadı" });
+            .send({ error: "No such user found" });
         eventEmitter.emit("send_email", {
           to: updatedUser.email,
-          subject: "Sifre Sıfırlama", // Subject line
-          html: `Talebiniz üzere şifre sıfırlama işleminiz gerceklesmiştir. <br/> Giris yaptıktan sonra sifrinizi degistirmeyi unutamyın <br/> Yeni Sifreniz:  <b>${new_password}</b>`, // html body
+          subject: "Password Reset", // Subject line
+          html: `As per your request, your password reset process has been completed. <br/> Don't forget to change your password after logging in. <br/> New Passpord:  <b>${new_password}</b>`, // html body
         });
         res.status(httpStatus.OK).send({
           message:
-            "şifre sıfırlama işlemi için sisteme kayıtlı e-posta adresinize gereken bilgileri gönderdik. ",
+            "We have sent the required information to your registered e-mail address for the password reset process.",
         });
       })
       .catch(() =>
         res
           .status(httpStatus.INTERNAL_SERVER_ERROR)
-          .send({ error: "şifreniz gönderilemedi" })
+          .send({ error: "Your password could not be sent" })
       );
   }
 
