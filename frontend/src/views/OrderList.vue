@@ -66,10 +66,28 @@ export default {
             <img :src="order.course_id.cover" alt="" />
           </div>
           <div class="projects-detail">
-            <div class="course-name">{{ order.course_id.course_name }}</div>
-            <div class="price">{{ order.course_id.price }} $</div>
+            <div class="course-name">
+              <router-link :to="`/courses/${order.course_id._id}`">Course: {{order.course_id.course_name}}</router-link>
+            </div>
+            <div class="price">Price: {{ order.course_id.price }} $</div>
           </div>
-          <span class="delete-order" @click="deleteOrder(order._id)">X</span>
+          <span class="delete-order" @click="deleteOrder(order._id)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="icon-size"
+              class="h-6 w-6 icon-color"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </span>
         </div>
       </div>
       <div class="payment-container">
@@ -112,6 +130,9 @@ export default {
   border-radius: 15px;
   margin-bottom: 10px;
 }
+.icon-color:hover {
+  fill: gray;
+}
 img {
   object-fit: cover;
   width: 300px;
@@ -128,9 +149,7 @@ img {
   font-weight: 600;
 }
 .delete-order:hover {
-  height: 35px;
-  border: 2px solid rgba(0, 0, 0, 0.281);
-  border-radius: 50%;
+  height: 50px;
 }
 .course-name {
   font-size: 1.5em;
@@ -162,6 +181,9 @@ button {
   border-radius: 5px;
   background: rgba(26, 26, 218, 0.548);
   margin-top: 20px;
+}
+button:hover {
+  background: rgba(69, 69, 253, 0.548);
 }
 .price {
   font-size: 30px;
