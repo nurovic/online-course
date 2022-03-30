@@ -26,7 +26,7 @@ const UserSchema = new Mongoose.Schema(
         {
             type: Mongoose.Schema.Types.ObjectId,
             ref: "course",
-            autopopulate: { maxDepth: 1, select: "course_name cover" },
+            autopopulate: { maxDepth: 1, select: "course_name cover price" },
           },
     ]
   },

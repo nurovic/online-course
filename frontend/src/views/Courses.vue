@@ -25,10 +25,9 @@ export default {
   methods: {
     ...mapActions("category", ["fetchCategory"]),
     ...mapActions("order", ["addOrders"]),
-    async order(id){
-      await this.addOrders(id)
-      
-    }
+    async order(id) {
+      await this.addOrders(id);
+    },
   },
 };
 </script>
@@ -59,7 +58,13 @@ export default {
               >
                 {{ course.course_name }}
               </router-link>
-              <div class="user detail">JS Server</div>
+              <div class="user detail">
+                <b>
+                  <router-link :to="`/user/${course.user_id._id}`">{{
+                    course.user_id.full_name
+                  }}</router-link>
+                </b>
+              </div>
               <div class="price detail">{{ course.price }} $</div>
               <div class="price-buy" @click="order(course._id)">Add Order</div>
             </div>
@@ -109,16 +114,16 @@ export default {
 .image img {
   max-width: 100%;
 }
-.price-buy{
+.price-buy {
   background: rgba(133, 144, 175, 0.904);
   display: inline-block;
   height: 30px;
   width: 100px;
-  font-size:20px;
+  font-size: 20px;
   font-weight: 800;
   color: white;
   border-radius: 8px;
-  padding-left:8px;
+  padding-left: 8px;
 }
 .price-buy:hover {
   background: rgba(86, 99, 141, 0.904);

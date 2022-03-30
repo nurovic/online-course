@@ -9,10 +9,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions("user",["reset_password"]),
+    ...mapActions("user",["resetPassword"]),
 
     resetPassword() {
-      this.reset_password(this.email)
+      this.resetPassword(this.email)
     }
   } 
 }

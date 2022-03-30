@@ -10,7 +10,7 @@ const eventEmitter = require("../scripts/events/eventEmitter");
 const cloudinary = require("../scripts/utilis/cloudinary");
 
 class User {
-  profile(req,res){
+  profile(req, res){
     UserService
     .findOne({_id: req.user._id})
     .then((response) => {
@@ -29,7 +29,6 @@ class User {
           .send({ message: "Error occurred while creating user" });
       });
   }
-  
   login(req, res) {
     req.body.password = passwordToHash(req.body.password);
     UserService.findOne(req.body)
@@ -70,7 +69,28 @@ class User {
       })
       .catch((e) => res.status(INTERNAL_SERVER_ERROR).send(e));
   }
-
+  findOne(req, res) {
+    if(!req.params?.id){
+        return res.status(httpStatus.BAD_REQUEST).send({
+            message:"ID information is missing for Update"
+        })
+    }
+    UserService
+        .findOne({_id: req.params.id})
+            .then((user) => {
+                return res.status(httpStatus.OK).send(
+                  {
+                    _id: user._id,
+                    full_name: user.full_name,
+                    profession: user.profession,
+                    profile_image: user.profile_image,
+                    about: user.about,
+                    created_courses: user.created_courses
+                  }
+                )
+            })
+            .catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))
+}
   update(req, res) {
     UserService.update(req.user?._id, req.body)
       .then((updatedUser) => {
