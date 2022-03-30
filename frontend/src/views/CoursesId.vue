@@ -79,7 +79,7 @@ export default {
           <div class="by">
             A course By
             <b>
-              <a href="#">user name</a>
+              <router-link :to="`/user/${course.user_id._id}`">{{course.user_id.full_name}}</router-link>
             </b>
           </div>
         </div>

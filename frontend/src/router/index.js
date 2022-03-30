@@ -9,6 +9,7 @@ import EditProfile from "../views/EditProfile.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import OrderList from "../views/OrderList.vue";
 import Profile from "../views/Profile.vue";
+import Profileid from "../views/Profileid.vue";
 import Instructor from "../views/Instructor.vue";
 import Navbar from "../components/Navbar.vue";
 import CourseNavbar from "../components/CourseNavbar.vue";
@@ -51,7 +52,7 @@ const routes = [
       navbar: Navbar,
     },
     beforeEnter: (to, from, next) => {
-      if (localStorage.token.length < 5) {
+      if (localStorage.getItem('token') === null) {
         return next({
           name: "LogIn",
         });
@@ -91,7 +92,7 @@ const routes = [
       navbar: Navbar,
     },
     beforeEnter: (to, from, next) => {
-      if (localStorage.token.length < 5) {
+      if (localStorage.getItem('token') === null) {
         return next({
           name: "LogIn",
         });
@@ -108,6 +109,14 @@ const routes = [
     },
   },
   {
+    path: "/user/:id",
+    name: "Profileid",
+    components: {
+      default: Profileid,
+      navbar: Navbar,
+    },
+  },
+  {
     path: "/instructor",
     name: "Instructor",
     components: {
@@ -115,7 +124,7 @@ const routes = [
       navbar: Navbar,
     },
     beforeEnter: (to, from, next) => {
-      if (localStorage.token.length < 5) {
+      if (localStorage.getItem('token') === null) {
         return next({
           name: "LogIn",
         });

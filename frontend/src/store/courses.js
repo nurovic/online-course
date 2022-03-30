@@ -7,13 +7,6 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-// const mutations = {
-
-// }
-
-// const actions = {
-// FETCH_EVETN:'fetchEvent'
-// }
 const courses = {
     namespaced: true,
     state: {
