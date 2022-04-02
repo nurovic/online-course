@@ -6,6 +6,7 @@ import Courses from "../views/Courses.vue";
 import VideoWatch from "../views/VideoWatch.vue";
 import Projects from "../views/Projects.vue";
 import EditProfile from "../views/EditProfile.vue";
+import ChangePassword from "../views/ChangePassword.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import OrderList from "../views/OrderList.vue";
 import Profile from "../views/Profile.vue";
@@ -66,6 +67,30 @@ const routes = [
     components: {
       default: EditProfile,
       navbar: Navbar,
+    },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('token') === null) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
+    },
+  },
+  {
+    path: "/change-password",
+    name: "ChangePassword",
+    components: {
+      default: ChangePassword,
+      navbar: Navbar,
+    },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('token') === null) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
     },
   },
   {

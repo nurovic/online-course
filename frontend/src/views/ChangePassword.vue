@@ -5,17 +5,16 @@ export default {
   data() {
       return {
         user: {
-          full_name:"",
-          email:"",
+          password:""
         }
       }
   },
 
   methods: {
-    ...mapActions("user",["updateUser"]),
+    ...mapActions("user",["changePassword"]),
 
       onUpdateProfile() {
-      this.updateUser(this.user)
+      this.changePassword(this.user)
       this.$router.push("/profile");
       location.reload()
       }
@@ -29,18 +28,13 @@ export default {
       <h1 class="information-title field">Profile Update</h1>
 
       <div class="field name">
-        <label for="name">name</label>
-        <input required class="input" type="name" key="name" v-model="user.full_name" />
+        <label for="password">New Password</label>
+        <input required class="input" type="password" key="password" v-model="user.password" />
       </div>
 
-      <div class="field email">
-        <label for="email">E mail</label>
-        <input required class="input" type="email" key="email" v-model="user.email" />
-      </div>
-      <router-link to="change-password">Change Password</router-link>
       <div class="field field-button">
         <button class="button" type="submit" @click="onUpdateProfile">
-          Update Profile
+          Change Password
         </button>
       </div>
     </div>
