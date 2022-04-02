@@ -22,7 +22,9 @@ const actions = {
     SING_UP:"singUp",
     GET_TOKEN:"getToken",
     RESET_PASSWORD:"resetPassword",
-    FIND_USER:"findUser"
+    FIND_USER:"findUser",
+    UPDATE_USER:"updateUser",
+    CHANGE_PASSWORD:"changePassword",
 }
 
 const user = {
@@ -97,6 +99,12 @@ const user = {
         async [actions.FIND_USER]({commit}, id){
             const findUser = await axios.get(`/users/${id}`)
             commit(mutations.SET_USER_ID, findUser.data)
+        },
+        async [actions.UPDATE_USER](_, user){
+            await axios.patch('/users', user)
+        },
+        async [actions.CHANGE_PASSWORD](_, password){
+            await axios.post('/users/change-password', password)
         }
 
     },

@@ -105,6 +105,9 @@ export default {
                   <span class="account-name">{{ user.full_name }}</span>
                   <ul>
                     <li class="ul_li" @click="signout">Log Out</li>
+                    <li>
+                      <router-link to="/edit-profile">Edit Profile</router-link>
+                    </li>
                   </ul>
                 </li>
               </ul>
