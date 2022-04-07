@@ -25,12 +25,10 @@ app.use(cors({
     credentials:true
 }))
 
-app.get('/', (res, req) => {
-    res.json("server start")
-})
 
-app.listen(process.env.APP_PORT || 3000, ()=> {
+app.listen(process.env.PORT || 3000, ()=> {
     console.log("Working")
+    
     app.use("/users", UserRoutes)
     app.use("/courses", CourseRoutes)
     app.use("/projects", ProjectRoutes)
