@@ -2,9 +2,9 @@
   "name": "online_course",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Mert AKTURK",
   "license": "ISC",

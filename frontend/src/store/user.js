@@ -88,7 +88,7 @@ const user = {
         [actions.LOG_OUT](){
             axios.defaults.headers.common['Authorization'] = ''
             localStorage.clear()
-            window.location.href = "http://localhost:8080/"
+            window.location.href = "/"
         },
         async [actions.SING_UP](_, singup){
            await axios.post('/users', singup)
