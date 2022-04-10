@@ -9,7 +9,7 @@ import movies from './movies'
 import levels from './levels'
 import order from './order'
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'https://onlinecoursev.herokuapp.com'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
