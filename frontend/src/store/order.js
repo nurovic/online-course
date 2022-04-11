@@ -4,6 +4,19 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
+const actions = {
+  FETCH_ORDERS: 'fetchOrders',
+  ADD_ORDERS: 'addOrders',
+  REMOVE_ORDER: 'removeOrder',
+  BUY_COURSE: 'buyCourse',
+  DELETE_ALL: 'deleteAll'
+}
+
+const mutations = {
+  SET_ORDERS: "setOrders",
+  ITEM_LENGTH: "itemLength"
+}
+
 const order = {
   namespaced: true,
   state: {
@@ -11,34 +24,34 @@ const order = {
     itemLength: 0
   },
   mutations: {
-    setOrders(state, orders) {
+    [mutations.SET_ORDERS](state, orders) {
       if(orders.length > 0){
         state.cart = orders.reduce((val, cur) => {
           return val + cur;
         });
       }
     },
-    itemLength(state, length) {
+    [mutations.ITEM_LENGTH](state, length) {
       state.itemLength = length
     }
   },
   actions: {
-    async fetchOrders({ commit }) {
+    async [actions.FETCH_ORDERS]({ commit }) {
       const orders = await axios.get("/order-cart");
-      commit("itemLength", orders.data.length)
-      commit("setOrders",orders.data.map((totalprice) => {
+      commit(mutations.ITEM_LENGTH, orders.data.length)
+      commit(mutations.SET_ORDERS,orders.data.map((totalprice) => {
           return totalprice.course_id.price;
         })
       );
       return orders.data;
     },
-    async addOrders(_, id) {
+    async [actions.ADD_ORDERS](_, id) {
       await axios.post("/order-cart", { course_id: id });
     },
-    async removeOrder(_, id) {
+    async [actions.REMOVE_ORDER](_, id) {
       await axios.delete(`/order-cart/${id}`);
     },
-    async buyCourse({dispatch}, stripe) {
+    async [actions.BUY_COURSE]({dispatch}, stripe) {
       await axios.post("/order-cart/buy-course", stripe)
       .then((res) => {
         const url = res.data.url;
@@ -46,7 +59,7 @@ const order = {
       });
       dispatch('deleteAll')
     },
-    async deleteAll() {
+    async [actions.DELETE_ALL]() {
       await axios.post("/order-cart/delete-many")
     }
   },

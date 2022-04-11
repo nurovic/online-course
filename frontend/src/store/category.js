@@ -6,16 +6,18 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const actions = {
+    FETCH_CATEGORY: 'fetchCategory'
+}
+
 const category = {
     namespaced: true,
     state: {
-
     },
     mutations: {
-
     },
     actions: {
-        async fetchCategory() {
+        async [actions.FETCH_CATEGORY]() {
             const category = await axios.get('/category')
             return category.data
         },

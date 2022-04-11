@@ -3,7 +3,12 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-const MUTATIONS = {
+
+const actions = {
+  CREATE_MOVIE: 'createMovie'  
+}
+
+const mutations = {
   SET_MOVIE_ID: "SET_MOVIE_ID",
 };
 const movies = {
@@ -12,14 +17,14 @@ const movies = {
     movieId: "",
   },
   mutations: {
-    [MUTATIONS.SET_MOVIE_ID](state, movieId) {
+    [mutations.SET_MOVIE_ID](state, movieId) {
       state.movieId = movieId;
     },
   },
   actions: {
-    async createMovie({ commit }, formdata) {
+    async [actions.CREATE_MOVIE]({ commit }, formdata) {
       const request = await axios.post("/movies", formdata);
-      commit(MUTATIONS.SET_MOVIE_ID, request.data._id);
+      commit(mutations.SET_MOVIE_ID, request.data._id);
     },
   },
   modules: {},

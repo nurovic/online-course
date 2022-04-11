@@ -7,33 +7,45 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const actions = {
+    FETCH_COURSES: 'fetchCourses',
+    FETCH_COURSES_ID: 'fetchCoursesId',
+    MAKE_COMMENT: 'makeComment',
+    REMOVE_COMMENT: 'removeComment',
+    CREATE_COURSE: 'createCourse',
+}
+
+const mutations = {
+    SET_COURSE: 'setCourse'
+}
+
 const courses = {
     namespaced: true,
     state: {
         fetchCourse:[]
     },
     mutations: {
-        setCourse(state, course){
+        [mutations.SET_COURSE](state, course){
             state.fetchCourse = course
         }
     },
     actions: {
-        async fetchCourses({commit}) {
+        async [actions.FETCH_COURSES]({commit}) {
             const fetchCourse = await axios.get('/courses')
-            commit("setCourse", fetchCourse.data)
+            commit(mutations.SET_COURSE, fetchCourse.data)
             return fetchCourse.data
         },
-        async fetchCoursesId(_, id) {
+        async [actions.FETCH_COURSES_ID](_, id) {
             const courseId = await axios.get(`/courses/${id}`)
             return courseId.data
         },
-        async makeComment(_, {id, comment}){
+        async [actions.MAKE_COMMENT](_, {id, comment}){
             await axios.post(`/courses/${id}/make-comment`,{comment})
         },
-        async removeComment(_,{id, commentId}){
+        async [actions.REMOVE_COMMENT](_,{id, commentId}){
             await axios.delete(`/courses/${id}/${commentId}`)
         },
-        async createCourse (_,courseform){
+        async [actions.CREATE_COURSE](_,courseform){
             await axios.post('/courses',courseform)
 
         }

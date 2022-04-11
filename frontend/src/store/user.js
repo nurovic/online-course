@@ -63,8 +63,8 @@ const user = {
         
         async [actions.LOGIN]({ commit}, login) {
             const user = await axios.post('/users/login', login)
-            commit('profileId', user.data._id)
-            commit('setToken', user.data.token.access_token)
+            commit(mutations.SET_PROFIL_ID, user.data._id)
+            commit(mutations.SET_TOKEN, user.data.token.access_token)
         },
         async [actions.PROFIL_PHOTO](_, photo) {
             await axios.post("/users/update-profile-image", photo)
@@ -82,7 +82,7 @@ const user = {
                 commit(mutations.SET_LEARNINGS, profile.data.learnings)
                 }
             } catch (error) {
-                console.log("error1", error)
+                console.log("error", error)
             }
         },
         [actions.LOG_OUT](){
