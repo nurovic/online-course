@@ -67,7 +67,6 @@ https://main--meek-speculoos-91d879.netlify.app/
 ![profile](https://github.com/nurovic/online-course/blob/main/image/1A.png?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image/2A.png?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image/9D.png?raw=true)
-![profile](https://github.com/nurovic/online-course/blob/main/image/2.PNG?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image/3d.png?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image/4d.png?raw=true)
 ![profile](https://github.com/nurovic/online-course/blob/main/image/6.PNG?raw=true)
