@@ -59,8 +59,8 @@ class OrderCart {
           },
         ],
         mode: "payment",
-        success_url: "http://localhost:8080/",
-        cancel_url: "http://localhost:8080/",
+        success_url: "https://main--meek-speculoos-91d879.netlify.app/",
+        cancel_url: "https://main--meek-speculoos-91d879.netlify.app/",
       });
       res.send({ url: session.url });
     } catch (err) {

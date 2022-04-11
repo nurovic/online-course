@@ -6,6 +6,14 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const actions = {
+    FETCH_PROJECTS: 'fetchProjects',
+    FETCH_COURSE_PROJECTS: 'fetchCourseProjects',
+    GET_PROJECT: 'getProject',
+    REMOVE_PROJECT: 'removeProject'
+
+}
+
 const projects = {
     namespaced: true,
     state: {
@@ -15,18 +23,18 @@ const projects = {
 
     },
     actions: {
-        async fetchProjects() {
+        async [actions.FETCH_PROJECTS]() {
             const projects = await axios.get('/projects')
             return projects.data
         },
-        async fetchCourseProjects(_, id) {
+        async [actions.FETCH_COURSE_PROJECTS](_, id) {
             const projects = await axios.get(`/courses/${id}/projects`)
             return projects.data
         },
-        async getProject(_, data) {
+        async [actions.GET_PROJECT](_, data) {
             await axios.post('/projects', data)
         },
-        async removeProject(_, id) {
+        async [actions.REMOVE_PROJECT](_, id) {
             return await axios.delete(`/projects/${id}`)
         }
         

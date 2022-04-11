@@ -42,7 +42,7 @@ export default {
         :key="category.id"
       >
         <h1>{{ category.name }}</h1>
-        <carousel :autoplay="true" :per-page="8">
+        <carousel :autoplay="true" :per-page="10">
           <slide
             class="slide"
             v-for="course in category.course"

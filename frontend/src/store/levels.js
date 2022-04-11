@@ -5,23 +5,16 @@ import axios from 'axios'
 
 
 Vue.use(Vuex)
-const Mutations = {
-    SET_LEVEL: 'SET_LEVEL'
+const actions = {
+    FETCH_LEVELS: 'fetchLevels'
 }
 const levels = {
     namespaced: true,
-    state: {
-        levels: []
-    },
-    mutations: {
-        [Mutations.SET_LEVEL](state, level) 
-            { state.levels = level }
-    },
+    state: {},
     actions: {
-        async fetchLevels() {
+        async [actions.FETCH_LEVELS]() {
             const level = await axios.get('/level')
             return level.data
-            // commit(Mutations.SET_LEVEL, level.data)
         }
     },
     modules: {
