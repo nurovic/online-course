@@ -46,7 +46,6 @@ export default {
   height: 80px;
   margin-top: 80px;
 }
-
 .image-field {
   margin: 10px 0 0 10px;
   border-radius: 50%;

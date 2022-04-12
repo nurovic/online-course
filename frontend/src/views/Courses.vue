@@ -60,9 +60,11 @@ export default {
               </router-link>
               <div class="user detail">
                 <b>
-                  <router-link :to="`/user/${course.user_id._id}`" class="user">{{
-                    course.user_id.full_name
-                  }}</router-link>
+                  <router-link
+                    :to="`/user/${course.user_id._id}`"
+                    class="user"
+                    >{{ course.user_id.full_name }}</router-link
+                  >
                 </b>
               </div>
               <div class="price detail">{{ course.price }} $</div>
@@ -95,7 +97,7 @@ export default {
   padding-top: 8px;
   font-size: 15px;
   color: rgb(135, 135, 135);
-  }
+}
 .course-name {
   font-size: 15px;
   font-weight: 600;
