@@ -54,15 +54,17 @@ export default {
             <div class="about-course">
               <router-link
                 :to="`/courses/${course._id}`"
-                class="course-name detail"
+                class="course-name detail name"
               >
                 {{ course.course_name }}
               </router-link>
               <div class="user detail">
                 <b>
-                  <router-link :to="`/user/${course.user_id._id}`">{{
-                    course.user_id.full_name
-                  }}</router-link>
+                  <router-link
+                    :to="`/user/${course.user_id._id}`"
+                    class="user"
+                    >{{ course.user_id.full_name }}</router-link
+                  >
                 </b>
               </div>
               <div class="price detail">{{ course.price }} $</div>
@@ -92,12 +94,12 @@ export default {
   margin-right: 15px;
 }
 .user {
-  color: rgb(135, 135, 135);
+  padding-top: 8px;
   font-size: 15px;
-  font-weight: 300;
+  color: rgb(135, 135, 135);
 }
 .course-name {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 600;
 }
 .price {
@@ -121,12 +123,18 @@ export default {
   height: 30px;
   width: 100px;
   font-size: 20px;
-  font-weight: 800;
+  align-items: center;
   color: white;
   border-radius: 8px;
   padding-left: 8px;
 }
 .price-buy:hover {
   background: rgba(86, 99, 141, 0.904);
+}
+.name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 </style>
