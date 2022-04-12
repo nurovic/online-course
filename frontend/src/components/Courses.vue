@@ -118,7 +118,12 @@ export default {
   flex-direction: column;
   margin: 10px 0 10px 10px;
 }
-
+.name {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .lesson-container-info .info-text .name {
   font-size: 20px;
   font-weight: 500;

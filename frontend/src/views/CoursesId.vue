@@ -65,7 +65,7 @@ export default {
             <source :src="mv.movie" type="video/mp4" />
           </video>
           <div class="navbar-course-detail">
-            <span>{{ course.description }}</span>
+            <span class="navbar-description">{{ course.description }}</span>
           </div>
         </div>
       </div>
@@ -211,5 +211,11 @@ export default {
 .comments {
   font-size: 30px;
   font-weight: 600;
+}
+.navbar-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 </style>
