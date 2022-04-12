@@ -123,7 +123,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .navbar {
   margin: 0 80px;
   display: flex;

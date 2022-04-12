@@ -28,6 +28,5 @@ a:hover {
 body {
   font-size: 18px;
   font-weight: 300;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
+font-family: 'Libre Baskerville', serif;}
 </style>

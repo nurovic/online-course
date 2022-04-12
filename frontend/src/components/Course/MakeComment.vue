@@ -1,18 +1,21 @@
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from "vuex";
 export default {
-  data(){
-    return{
-      comment:'',
-    }
+  data() {
+    return {
+      comment: "",
+    };
   },
-  methods:{
-    ...mapActions('courses', ['makeComment']),
-    async sendComment(){
-      await this.makeComment({id:this.$route.params.id, comment: this.comment})
-    }
+  methods: {
+    ...mapActions("courses", ["makeComment"]),
+    async sendComment() {
+      await this.makeComment({
+        id: this.$route.params.id,
+        comment: this.comment,
+      });
+    },
   },
-    computed: {
+  computed: {
     ...mapState("user", ["user"]),
   },
 };
@@ -20,19 +23,20 @@ export default {
 
 <template>
   <div class="make-comment-container">
-      <div class="profil">
-        <img
-          class="image-field"
-          :src="user.profile_image"
-          alt=""
-          aria-placeholder="Wtire"
-        />
-      </div>
-      <div class="comment-field">
-        <textarea name="comment" id="comment" v-model="comment"></textarea>
-        <button @click="sendComment">Send</button>
-      </div>
-
+    <div class="profil">
+      <img
+        v-if="user.profile_image"
+        class="image-field"
+        :src="user.profile_image"
+        alt=""
+        aria-placeholder="Wtire"
+      />
+      <img v-else class="image-field" src="../../assets/profile.jpg" alt="" />
+    </div>
+    <div class="comment-field">
+      <textarea name="comment" id="comment" v-model="comment"></textarea>
+      <button @click="sendComment">Send</button>
+    </div>
   </div>
 </template>
 
