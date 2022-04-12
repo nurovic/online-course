@@ -123,7 +123,7 @@ export default {
   </div>
 </template>
 
-<style >
+<style>
 .navbar {
   margin: 0 80px;
   display: flex;
@@ -137,6 +137,7 @@ export default {
 }
 
 .navbar-middle-container {
+  margin-right:65px ;
   width: 72%;
 }
 
@@ -200,18 +201,19 @@ li {
 .filter-container {
   position: absolute;
   left: 320px;
-  top: 60px;
+  top: 80px;
   width: 800px;
 }
 .list-filter {
   cursor: pointer;
-  background: rgba(93, 104, 128, 0.096);
+  background: rgba(0, 0, 0, 0.096);
   height: 30px;
   display: flex;
   flex-direction: row;
   border: 2px solid rgba(0, 0, 0, 0.144);
   border-radius: 5px;
   margin-left: 30px;
+  margin-bottom: 10px;
 }
 .list-detail {
   display: flex;
