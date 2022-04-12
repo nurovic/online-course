@@ -126,7 +126,6 @@ export default {
   justify-content: center;
   width: 250px;
   height: 600px;
-  /* background: rgba(228, 228, 228, 0.603); */
   margin: 3px;
   border: 2px solid rgba(100, 99, 99, 0.096);
   box-shadow: rgba(0, 0, 0, 0.05) 0px 7px 7px, rgba(0, 0, 0, 0.022) 0px 5px 5px;
@@ -177,13 +176,13 @@ a {
   font-size: 40px;
   cursor: pointer;
   color: rgb(141, 141, 141);
-  /* outline: none; */
+  background: none;
 }
 button {
   border: none;
 }
 #title-courses:hover {
-  color: darkblue;
+  color: rgb(0, 0, 0);
 }
 .icon {
   color: rgba(0, 0, 0, 0.212);

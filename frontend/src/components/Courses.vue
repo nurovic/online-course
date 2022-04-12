@@ -77,6 +77,7 @@ export default {
 .button {
     cursor: pointer;
     width:200px;
+    height: 25px;
     display: flex;
     flex-direction: row;
     justify-content: center;
