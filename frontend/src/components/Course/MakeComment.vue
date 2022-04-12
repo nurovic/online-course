@@ -24,8 +24,7 @@ export default {
 <template>
   <div class="make-comment-container">
     <div class="profil">
-      <img
-        v-if="user.profile_image"
+      <img v-if="user.profile_image"
         class="image-field"
         :src="user.profile_image"
         alt=""
