@@ -38,6 +38,7 @@ export default {
     async sendCourse(e) {
       e.preventDefault();
       try {
+        this.isLoading = true
         const formdata = new FormData();
         formdata.append("title", this.title);
         formdata.append("movie", this.movie);
@@ -52,6 +53,7 @@ export default {
         courseform.append("level", this.selectedLevel);
         courseform.append("cover", this.cover);
         await this.createCourse(courseform);
+        this.isLoading = false
         this.$router.push("/");
       } catch (err) {
         console.log(err);

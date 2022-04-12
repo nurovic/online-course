@@ -92,7 +92,8 @@ export default {
   margin-right: 15px;
 }
 .user {
-  font-size: 20px;
+  color: rgb(135, 135, 135);
+  font-size: 15px;
   font-weight: 300;
 }
 .course-name {

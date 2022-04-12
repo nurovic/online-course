@@ -1,11 +1,9 @@
 <script>
-// import LessonsVideo from "../components/lessonsVideo.vue";
 import Courses from "../components/Courses.vue";
 import {  mapState, mapActions } from "vuex";
 export default {
   name: "Profileid",
   components: {
-    // LessonsVideo,
     Courses,
   },
   data() {
