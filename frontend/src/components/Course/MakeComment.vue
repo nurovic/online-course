@@ -39,7 +39,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style>
 .make-comment-container {
   display: flex;
   height: 80px;
