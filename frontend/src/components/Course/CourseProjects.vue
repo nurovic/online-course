@@ -108,7 +108,6 @@ export default {
 .projects {
   display: flex;
   flex-direction: row;
-  background: rgba(226, 226, 226, 0.828);
   border: 1px solid rgba(0, 0, 0, 0.212);
   border-radius: 15px;
   margin-bottom: 20px;

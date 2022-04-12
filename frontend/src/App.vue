@@ -28,5 +28,6 @@ a:hover {
 body {
   font-size: 18px;
   font-weight: 300;
-font-family: 'Libre Baskerville', serif;}
+  font-family: 'Anek Tamil', sans-serif;
+}
 </style>

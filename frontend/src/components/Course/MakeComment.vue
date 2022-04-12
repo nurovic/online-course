@@ -39,7 +39,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style>
 .make-comment-container {
   display: flex;
   height: 80px;
@@ -68,10 +68,8 @@ button {
   margin-left: 15px;
   border: none;
   border-radius: 2px;
-  background: rgba(226, 226, 226, 0.828);
 }
 button:hover {
-  background: rgb(177, 177, 177);
   color: #fff;
 }
 </style>

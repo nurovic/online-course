@@ -77,7 +77,7 @@ export default {
           <h1 class="course-name">{{ course.course_name }}</h1>
           <br />
           <div class="by">
-            A course By
+            Course By
             <b>
               <router-link :to="`/user/${course.user_id._id}`">{{course.user_id.full_name}}</router-link>
             </b>
@@ -103,7 +103,7 @@ export default {
         </keep-alive>
         <span class="comments">Comments</span>
         <Commented />
-        <MakeComment  />
+        <MakeComment />
       </div>
 
       <div class="right-container">
@@ -161,13 +161,14 @@ export default {
   margin-right: 30px;
 }
 .button {
+  background: none;
   border-style: none;
   margin-right: 10px;
   height: 35px;
   font-size: 15px;
 }
 .button:hover {
-  background: rgb(231, 231, 231);
+  background: rgb(107, 107, 107);
 }
 .right-container {
   padding: 25px;

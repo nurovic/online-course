@@ -84,9 +84,7 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-.img-container {
-  /* width: 35em; */
-}
+
 .icon-color:hover{
   fill: gray;
 }
