@@ -13,6 +13,7 @@ export default {
         id: this.$route.params.id,
         comment: this.comment,
       });
+      location.reload()
     },
   },
   computed: {
@@ -39,7 +40,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .make-comment-container {
   display: flex;
   height: 80px;
