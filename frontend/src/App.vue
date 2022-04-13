@@ -26,7 +26,6 @@ a:hover {
   color: blue;
 }
 body {
-  font-size: 18px;
   font-weight: 300;
   font-family: 'Anek Tamil', sans-serif;
 }
