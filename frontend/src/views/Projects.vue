@@ -1,9 +1,11 @@
 <script>
 import { mapActions } from "vuex";
-
+import EnlargeableImage from "@diracleo/vue-enlargeable-image";
 export default {
   name: "Projects",
-
+  components: {
+    EnlargeableImage,
+  },
   data() {
     return {
       projects: [],
@@ -29,41 +31,42 @@ export default {
     <h1>Your Projects</h1>
     <div class="projects" v-for="project in projects" :key="project.id">
       <div class="project-container">
-        <div class="img-container">
-          <img :src="project.project_file" alt="" />
-        </div>
+        <enlargeable-image
+          :src_large="project.project_file"
+          animation_duration="500"
+        >
+          <img class="img-container" :src="project.project_file" alt="" />
+        </enlargeable-image>
         <div class="projects-detail">
-          <div class="course-name" >
-            <router-link :to="`/courses/${project.course_id._id}`">Course: {{project.course_id.course_name}}</router-link>
-          </div>
-          <div class="project-description">
-          Comment: {{ project.comment }}
-          </div>
-        </div>
-          <span @click="deleteProject(project._id)" class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              id="icon-size"
-              class="h-6 w-6 icon-color"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div class="course-name">
+            <router-link :to="`/courses/${project.course_id._id}`"
+              >Course: {{ project.course_id.course_name }}</router-link
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </span>
+          </div>
+          <div class="project-description">Comment: {{ project.comment }}</div>
+        </div>
+        <span @click="deleteProject(project._id)" class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="icon-size"
+            class="h-6 w-6 icon-color"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </span>
       </div>
       <div class="edit-panel"></div>
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 .projects-container {
@@ -85,13 +88,14 @@ export default {
   justify-content: space-around;
 }
 
-.icon-color:hover{
+.icon-color:hover {
   fill: gray;
 }
-img {
+.img-container {
+  border-radius: 15px;
+  height: 12em;
+  width: 250px;
   object-fit: cover;
-  width: 200px;
-  height: 100%;
 }
 .projects-detail {
   width: 90%;
@@ -109,74 +113,5 @@ img {
 #icon-size {
   height: 40px;
   color: black;
-}
-.enlargeable-image > .slot {
-  display:inline-block;
-  max-width:100%;
-  max-height:100%;
-  cursor:zoom-in;
-}
-/* default img if no element passed in */
-.enlargeable-image > .slot > img.default {
-  max-width:100%;
-  vertical-align:middle;
-}
-/* passed-in element when growth is happening */
-.enlargeable-image.active > .slot {
-  opacity:1;
-  filter:grayscale(100%);
-}
-/* full version that grows (background image allows seamless transition from thumbnail to full) */
-.enlargeable-image .full {
-  cursor:zoom-out;
-  background-color:transparent;
-  align-items:center;
-  justify-content:center;
-  background-position: center center;
-  background-repeat:no-repeat;
-  background-size:contain;
-  display:none;
-  
-}
-.enlargeable-image .full > img {
-  object-fit:contain;
-  width:100%;
-  height:100%;
-}
-/* full version while getting bigger */
-.enlargeable-image .full.enlarging {
-  display:flex;
-  position:fixed;
-  left:0px;
-  top:0px;
-  width:100%;
-  height:100%;
-  background-color:transparent;
-  cursor:zoom-out;
-  z-index:3;
-}
-/* full version while at its peak size */
-.enlargeable-image .full.enlarged {
-  display:flex;
-  position:fixed;
-  left:0px;
-  top:0px;
-  width:100%;
-  height:100%;
-  background-color:transparent;
-  cursor:zoom-out;
-  z-index:2;
-}
-/* full version while getting smaller */
-.enlargeable-image .full.delarging {
-  display:flex;
-  position:fixed;
-  left:0px;
-  top:0px;
-  width:100%;
-  height:100%;
-  background-color:transparent;
-  cursor:zoom-in;
-  z-index:1;
 }
 </style>
