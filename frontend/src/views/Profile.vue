@@ -2,9 +2,12 @@
 import LessonsVideo from "../components/lessonsVideo.vue";
 import Learnings from "../components/Learnings.vue";
 import { mapState, mapActions } from "vuex";
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
+
 export default {
   name: "Profile",
   components: {
+    EnlargeableImage,
     LessonsVideo,
     Learnings,
   },
@@ -65,7 +68,13 @@ export default {
       <div class="container-right">
         <div class="profile-photo-container">
           <div class="profile-photo-img">
-            <img v-if="user.profile_image" class="profile-photo" :src="this.user.profile_image" alt="" />
+            <enlargeable-image
+             v-if="user.profile_image"
+             :src_large="this.user.profile_image"
+             animation_duration="500"
+             >
+              <img class="profile-photo" :src="this.user.profile_image" alt="" />
+            </enlargeable-image>
             <img v-else class="profile-photo" src="../assets/profile.jpg" alt="" />
             <div class="image-upload">
               <label for="file-input">

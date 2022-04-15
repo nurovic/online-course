@@ -1,9 +1,12 @@
 <script>
 import { mapActions } from "vuex";
+import EnlargeableImage from "@diracleo/vue-enlargeable-image";
 
 export default {
   name: "Projects",
-
+  components: {
+    EnlargeableImage,
+  },
   data() {
     return {
       projects: [],
@@ -63,11 +66,13 @@ export default {
     </div>
 
     <div class="projects" v-for="project in projects" :key="project.id">
-      <img
-        class="project-image image-file"
-        :src="project.project_file"
-        alt=""
-      />
+        <enlargeable-image
+          :src_large="project.project_file"
+          animation_duration="500"
+        >
+          <!-- <img class="img-container" :src="project.project_file" alt="" /> -->
+      <img class="project-image image-file" :src="project.project_file" alt="" />
+        </enlargeable-image>
 
       <div class="project-owner">
         <div
@@ -75,7 +80,6 @@ export default {
           <router-link
           to="/"
           >
-
           {{ project.createdBy.full_name }}
           </router-link>
         </div>

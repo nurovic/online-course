@@ -1,9 +1,11 @@
 <script>
 import Courses from "../components/Courses.vue";
+import EnlargeableImage from '@diracleo/vue-enlargeable-image';
 import {  mapState, mapActions } from "vuex";
 export default {
   name: "Profileid",
   components: {
+    EnlargeableImage,
     Courses,
   },
   data() {
@@ -52,7 +54,13 @@ export default {
       <div class="container-right">
         <div class="profile-photo-container">
           <div class="profile-photo-img">
-            <img v-if="userId.profile_image" class="profile-photo" :src="this.userId.profile_image" alt="" />
+            <enlargeable-image
+             v-if="userId.profile_image"
+             :src_large="this.userId.profile_image"
+             animation_duration="500">
+              <img class="profile-photo" :src="this.userId.profile_image" alt="" />
+            </enlargeable-image>
+            <!-- <img v-if="userId.profile_image" class="profile-photo" :src="this.userId.profile_image" alt="" /> -->
             <img v-else class="profile-photo" src="../assets/profile.jpg" alt="" />
           </div>
         </div>
