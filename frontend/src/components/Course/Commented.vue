@@ -41,7 +41,11 @@ export default {
         <img class="image-field" :src="comment.user_id.profile_image" alt="" />
       </div>
       <div class="info-comment">
-        <div class="user-name">{{ comment.user_id.full_name }}</div>
+        <router-link 
+        :to="`/user/${comment.user_id._id}`"
+        >
+          <div class="user-name">{{ comment.user_id.full_name }}</div>
+        </router-link>
         <hr />
         <div class="comment">{{ comment.comment }}</div>
       </div>
