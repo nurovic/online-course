@@ -70,7 +70,6 @@ export default {
           :src_large="project.project_file"
           animation_duration="500"
         >
-          <!-- <img class="img-container" :src="project.project_file" alt="" /> -->
       <img class="project-image image-file" :src="project.project_file" alt="" />
         </enlargeable-image>
 
@@ -78,7 +77,7 @@ export default {
         <div
           class="user-name">
           <router-link
-          to="/"
+          :to="`/user/${project.createdBy._id}`"
           >
           {{ project.createdBy.full_name }}
           </router-link>
