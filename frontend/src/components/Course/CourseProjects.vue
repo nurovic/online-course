@@ -151,6 +151,8 @@ textarea {
   outline: none;
   border: none;
   border-radius: 5px;
+  border: .5px solid black;
+  
 }
 .add-project-title {
   font-size: 25px;
