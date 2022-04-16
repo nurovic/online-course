@@ -1,12 +1,13 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import { mapActions } from "vuex";
+import { notification } from 'ant-design-vue';
 export default {
   name: "Courses",
   components: {
     Carousel,
     Slide,
-  },
+  },    
   data() {
     return {
       isLoading: true,
@@ -27,6 +28,7 @@ export default {
     ...mapActions("order", ["addOrders"]),
     async order(id) {
       await this.addOrders(id);
+      notification.success({message: 'Course Added to Order'})
     },
   },
 };

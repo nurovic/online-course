@@ -10,7 +10,6 @@ class Course {
     index(req, res) {
         CourseService
         .list()
-        // .findOne({_id: req.body.user_id._id})
             .then((response) => {
                 res.status(httpStatus.OK).send(response)
             }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e))

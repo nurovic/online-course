@@ -1,6 +1,6 @@
 <script>
 import { mapActions } from "vuex";
-
+import { notification } from 'ant-design-vue';
 export default {
   name: "learnings",
   props: ["userId"],
@@ -14,6 +14,7 @@ export default {
 
     async order(id) {
       await this.addOrders(id);
+      notification.success({message: 'Course Added to Order'})
     },
   },
   async mounted() {

@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-
+import 'ant-design-vue/dist/antd.css'
 
 Vue.config.productionTip = false
 
