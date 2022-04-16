@@ -1,5 +1,7 @@
 <script>
 import { mapActions } from "vuex";
+import { notification } from 'ant-design-vue';
+
 export default {
   name: "LogIn",
   data() {
@@ -16,10 +18,9 @@ export default {
       e.preventDefault();
       try {
         await this.login(this.user);
-        this.$router.push("/profile")
-         location.reload()
+        window.location.href = "/profile"
       } catch (err) {
-        console.log(err);
+        notification.error({message: err.response.data.message})
       }
     },
   },

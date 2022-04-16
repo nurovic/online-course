@@ -33,8 +33,8 @@ export default {
       />
       <img v-else class="image-field" src="../../assets/profile.jpg" alt="" />
     </div>
-    <div class="comment-field">
-      <textarea name="comment" id="comment" v-model="comment"></textarea>
+    <div class="comment-field" >
+      <textarea  name="comment" id="comment" v-model="comment" ></textarea>
       <button @click="sendComment">Send</button>
     </div>
   </div>
@@ -61,7 +61,8 @@ textarea {
   width: 80vh;
   height: 50px;
   outline: none;
-  border: none;
+  border: .5px solid black;
+  border-radius:4px ;
 }
 button {
   height: 50px;

@@ -60,7 +60,6 @@ export default {
              animation_duration="500">
               <img class="profile-photo" :src="this.userId.profile_image" alt="" />
             </enlargeable-image>
-            <!-- <img v-if="userId.profile_image" class="profile-photo" :src="this.userId.profile_image" alt="" /> -->
             <img v-else class="profile-photo" src="../assets/profile.jpg" alt="" />
           </div>
         </div>

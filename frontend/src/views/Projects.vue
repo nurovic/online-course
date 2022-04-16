@@ -1,6 +1,7 @@
 <script>
 import { mapActions } from "vuex";
 import EnlargeableImage from "@diracleo/vue-enlargeable-image";
+import { notification } from 'ant-design-vue';
 export default {
   name: "Projects",
   components: {
@@ -16,6 +17,7 @@ export default {
     async deleteProject(id) {
       await this.removeProject(id);
       this.updateProjects();
+      notification.error({message: 'Project Deleted.'})
     },
     async updateProjects() {
       this.projects = await this.fetchProjects();

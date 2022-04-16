@@ -36,7 +36,7 @@ class User {
         if (!user)
           return res
             .status(httpStatus.NOT_FOUND)
-            .send({ message: "the user not find" });
+            .send({ message: "The user not find" });
         user = {
           ...user.toObject(),
           tokens: {
@@ -46,7 +46,6 @@ class User {
         };
         delete user.password;
         res.status(httpStatus.OK).send(
-          // user
           {
           _id: user._id,
           full_name: user.full_name,

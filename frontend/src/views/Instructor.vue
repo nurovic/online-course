@@ -1,10 +1,8 @@
 <script>
 import { mapActions, mapState } from "vuex";
-// import Dropdown from "@/components/Dropdown";
+import { notification } from 'ant-design-vue';
+
 export default {
-  components: {
-    // Dropdown,
-  },
   data() {
     return {
       isLoading: true,
@@ -55,8 +53,9 @@ export default {
         await this.createCourse(courseform);
         this.isLoading = false
         this.$router.push("/");
+        notification.success({message: 'Course Created'})
       } catch (err) {
-        console.log(err);
+        notification.error({message: err.response.data.message})
       }
     },
   },

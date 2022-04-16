@@ -1,5 +1,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
+import { notification } from 'ant-design-vue';
 export default {
   name: "OrderList",
   data() {
@@ -22,7 +23,7 @@ export default {
     },
     async sendOrder() {
       if(this.itemLength == 0) {
-        return alert("Firstly Add Course")
+        notification.error({message: "Firstly Add Course"})
       }else{
         await this.buyCourse(this.stripe);
 
@@ -31,6 +32,7 @@ export default {
     async deleteOrder(id) {
       await this.removeOrder(id);
       this.updateOrders();
+      notification.error({message: 'Course Deleted.'})
     },
   },
   computed: {
