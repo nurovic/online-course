@@ -32,7 +32,7 @@ export default {
     async deleteOrder(id) {
       await this.removeOrder(id);
       this.updateOrders();
-      notification.error({message: 'Course Deleted.'})
+      notification.error({message: 'Order Deleted'})
     },
   },
   computed: {
