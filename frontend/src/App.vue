@@ -15,6 +15,10 @@ export default {
 </template>
 
 <style>
+*, ::after, ::before {
+  box-sizing: none border-box;
+}
+
 ul {
   list-style-type: none;
 }
