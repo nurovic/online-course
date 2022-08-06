@@ -2,11 +2,13 @@
 import { Carousel, Slide } from "vue-carousel";
 import { mapActions } from "vuex";
 import { notification } from 'ant-design-vue';
+import PageLoaderVue from "../components/PageLoader.vue";
 export default {
   name: "Courses",
   components: {
     Carousel,
     Slide,
+    PageLoaderVue
   },    
   data() {
     return {
@@ -36,7 +38,9 @@ export default {
 
 <template>
   <div class="course-carousel">
-    <div v-if="isLoading">Please Wait...</div>
+    <div v-if="isLoading">
+      <PageLoaderVue/>
+    </div>
     <div else>
       <div
         class="container-carousel"

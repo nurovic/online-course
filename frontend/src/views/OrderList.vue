@@ -1,63 +1,70 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { notification } from 'ant-design-vue';
-export default {
-  name: "OrderList",
-  data() {
-    return {
-      isLoading: true,
-      orders: [],
-      stripe: {
-        totalAmount: "",
-        course_name: "",
-        course_id:""
-      },
-    };
-  },
-  methods: {
-    ...mapActions("order", ["fetchOrders"]),
-    ...mapActions("order", ["removeOrder"]),
-    ...mapActions("order", ["buyCourse"]),
-    async updateOrders() {
-      this.orders = await this.fetchOrders();
-    },
-    async sendOrder() {
-      if(this.itemLength == 0) {
-        notification.error({message: "Firstly Add Course"})
-      }else{
-        await this.buyCourse(this.stripe);
+import PageLoaderVue from "../components/PageLoader.vue";
 
-      }
+
+export default {
+    name: "OrderList",
+    data() {
+        return {
+            isLoading: true,
+            orders: [],
+            stripe: {
+                totalAmount: "",
+                course_name: "",
+                course_id: ""
+            },
+        };
     },
-    async deleteOrder(id) {
-      await this.removeOrder(id);
-      this.updateOrders();
-      notification.error({message: 'Order Deleted '})
+    comments: {
+        PageLoaderVue
     },
-  },
-  computed: {
-    ...mapState("order", ["cart"]),
-    ...mapState("order", ["itemLength"]),
-  },
-  async mounted() {
-    await this.updateOrders();
-    if(this.itemLength == 0 ){
-      return this.isLoading = false
-    }else {
-    this.isLoading = false;
-    this.stripe.totalAmount = this.cart;
-    this.stripe.course_name = this.orders.map(
-      (name) => name.course_id.course_name
-    ).toString();
-    this.stripe.course_id = this.orders.map(id => id.course_id._id)
-      }
-  },
+    methods: {
+        ...mapActions("order", ["fetchOrders"]),
+        ...mapActions("order", ["removeOrder"]),
+        ...mapActions("order", ["buyCourse"]),
+        async updateOrders() {
+            this.orders = await this.fetchOrders();
+        },
+        async sendOrder() {
+            if (this.itemLength == 0) {
+                notification.error({ message: "Firstly Add Course" });
+            }
+            else {
+                await this.buyCourse(this.stripe);
+            }
+        },
+        async deleteOrder(id) {
+            await this.removeOrder(id);
+            this.updateOrders();
+            notification.error({ message: "Order Deleted " });
+        },
+    },
+    computed: {
+        ...mapState("order", ["cart"]),
+        ...mapState("order", ["itemLength"]),
+    },
+    async mounted() {
+        await this.updateOrders();
+        if (this.itemLength == 0) {
+            return this.isLoading = false;
+        }
+        else {
+            this.isLoading = false;
+            this.stripe.totalAmount = this.cart;
+            this.stripe.course_name = this.orders.map((name) => name.course_id.course_name).toString();
+            this.stripe.course_id = this.orders.map(id => id.course_id._id);
+        }
+    },
 };
 </script>
 <template>
   <div class="order-container">
     <h1>Order List</h1>
-    <div v-if="isLoading">Please wait...</div>
+    <div v-if="isLoading">
+      <PageLoaderVue/>
+    </div>
     <div v-else class="order-detail">
       <div v-if="this.itemLength == 0" class="projects-list">
         <h1 class="no-order">No Order...</h1>

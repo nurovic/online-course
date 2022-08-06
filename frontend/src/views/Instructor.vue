@@ -1,6 +1,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import { notification } from 'ant-design-vue';
+import PageLoaderVue from "../components/PageLoader.vue";
 
 export default {
   data() {
@@ -17,6 +18,9 @@ export default {
       selectedLevel: "",
       cover: null,
     };
+  },
+  components: {
+    PageLoaderVue
   },
   computed: {
     ...mapState("movies", ["movieId"]),
@@ -70,7 +74,9 @@ export default {
 
 <template>
   <div class="instructor-container">
-    <div v-if="isLoading">Please Wait...</div>
+    <div v-if="isLoading">
+      <PageLoaderVue/>
+    </div>
     <div v-else class="field course-information">
       <h1 class="information-title field">Create Course</h1>
       <div class="field projectName">
