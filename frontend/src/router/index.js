@@ -44,6 +44,14 @@ const routes = [
       default: Courses,
       navbar: Navbar,
     },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('token') === null) {
+        return next({
+          name: "LogIn",
+        });
+      }
+      next();
+    },
   },
   {
     path: "/order-list",
