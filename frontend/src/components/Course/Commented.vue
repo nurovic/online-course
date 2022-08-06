@@ -1,7 +1,12 @@
 <script>
 import { mapActions } from "vuex";
+import PageLoaderVue from "../PageLoader.vue";
+
 export default {
   name: "Comment",
+  components: {
+    PageLoaderVue
+  },
   data() {
     return {
       course: [],
@@ -30,7 +35,9 @@ export default {
 
 <template>
   <div class="comment-container">
-    <div v-if="isLoading">Please Wait...</div>
+    <div v-if="isLoading">
+      <PageLoaderVue/>
+    </div>
     <div
     v-else
       class="comment-field"
