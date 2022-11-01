@@ -51,12 +51,14 @@ export default {
         </router-link>
         <div class="field field-button">
           <button class="button" type="submit">Login</button>
-        </div>
-      </form>
-      <div class="login">
+          <div class="login">
         Don't have an account ?
         <router-link class="login-button" to="/signup"> Sign Up </router-link>
       </div>
+        </div>
+        
+      </form>
+
     </div>
   </div>
 </template>
