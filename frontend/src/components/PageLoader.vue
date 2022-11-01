@@ -9,9 +9,9 @@ export default {
 
         <div class="loading-container">
             <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
+            <div class="circle"></div>
         </div>
+    </div>
 </template>
 
 <style scoped>
@@ -37,6 +37,7 @@ export default {
         transform: rotate(360deg);
     }
 }
+
 .circle {
     animation: grow 1.5s linear infinite;
     background-color: purple;

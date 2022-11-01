@@ -188,7 +188,7 @@ input {
 }
 
 body {
-  background: rgba(168, 175, 194, 0.235);
+  background: rgba(168, 175, 194, 0.541);
 }
 </style>
 
@@ -200,13 +200,17 @@ li {
 }
 .filter-container {
   position: absolute;
-  left: 320px;
+  left: 200px;
   top: 80px;
-  width: 800px;
+  min-width: 400px;
+  z-index: 10;
+}
+.filter-container a {
+  color: white !important;
 }
 .list-filter {
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.096);
+  background: gray;
   height: 30px;
   display: flex;
   flex-direction: row;
@@ -231,13 +235,13 @@ li {
   align-items: center;
   height: 29px;
   margin: 0 0 15px;
-  padding: 3px;
+  padding: 30px;
   border-radius: 9px;
 }
 
 ul li ul li:hover {
   cursor: pointer;
-  background: rgba(78, 140, 255, 0.301);
+  background: rgba(134, 161, 201, 0.903);
 }
 ul li ul {
   visibility: hidden;

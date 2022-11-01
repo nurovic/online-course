@@ -1,5 +1,7 @@
 <script>
 import { mapActions } from "vuex";
+import { notification } from 'ant-design-vue';
+
 export default {
   data() {
     return {
@@ -14,13 +16,37 @@ export default {
   },
   methods: {
     ...mapActions("user", ["singUp"]),
+    formValidate(){
+      if(!this.userinfo.full_name){
+        notification.error({message: 'You Must Enter Name'})
+        return
+      }
+      if(!this.userinfo.email){
+        notification.error({message: 'You Must Enter Email'})
+        return
+      }
+      if(this.userinfo.password.length < 8){
+        notification.error({message: 'Password Must be More Than 8 Characters'})
+        return
+      }
+      if(!this.userinfo.profession){
+        notification.error({message: 'You Must Enter Profession'})
+        return
+      }
+      if(!this.userinfo.about){
+        notification.error({message: 'You Must Enter About'})
+        return
+      }
+      return 
+    },
     async submitSingnUp() {
-      try {
+      if(this.formValidate()) {
+        try {
         await this.singUp(this.userinfo)
         this.$router.push("/login")
-        
       } catch (error) {
         console.log(error);
+      }
       }
     },
   },
@@ -74,12 +100,14 @@ export default {
         <button class="button" type="submit" @click="submitSingnUp">
           Create Account
         </button>
-      </div>
 
-      <div class="login">
+        <div class="login">
         Already have an account ?
         <router-link class="login-button" to="/login"> Sign in </router-link>
       </div>
+      </div>
+
+
     </div>
   </div>
 </template>
