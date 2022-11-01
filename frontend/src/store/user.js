@@ -60,7 +60,6 @@ const user = {
         }
     },
     actions: {
-        
         async [actions.LOGIN]({ commit}, login) {
             const user = await axios.post('/users/login', login)
             commit(mutations.SET_PROFIL_ID, user.data._id)

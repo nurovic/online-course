@@ -74,7 +74,9 @@ export default {
   display: flex;
   flex-direction: row;
 }
-
+.container-carousel h1{
+  padding-left: 40px ;
+}
 .slide {
   height: 350px;
   width: 80px;
@@ -122,12 +124,13 @@ export default {
   background: rgba(133, 144, 175, 0.904);
   display: inline-block;
   height: 30px;
-  width: 100px;
+  min-width: 120px;
   font-size: 20px;
   align-items: center;
   color: white;
   border-radius: 8px;
   padding-left: 8px;
+  padding-right: 8px;
 }
 
 .price-buy:hover {
