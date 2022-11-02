@@ -1,6 +1,6 @@
 Demo:
 
-https://62ee6da5a20cbe0008da9e2a--meek-speculoos-91d879.netlify.app/
+https://vcourse.netlify.app/
 
 # Installation
 
