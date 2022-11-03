@@ -20,7 +20,7 @@ export default {
         await this.login(this.user);
         window.location.href = "/profile"
       } catch (err) {
-        notification.error({message: err.response.data.message})
+        notification.error({ message: err.response.data.message })
       }
     },
   },
@@ -39,12 +39,7 @@ export default {
 
         <div class="field password">
           <label for="password">Password</label>
-          <input
-            class="input"
-            type="password"
-            key="password"
-            v-model="user.password"
-          />
+          <input class="input" type="password" key="password" v-model="user.password" />
         </div>
         <router-link to="/reset-password">
           <a>Reset Password</a>
@@ -52,11 +47,11 @@ export default {
         <div class="field field-button">
           <button class="button" type="submit">Login</button>
           <div class="login">
-        Don't have an account ?
-        <router-link class="login-button" to="/signup"> Sign Up </router-link>
-      </div>
+            Don't have an account ?
+            <router-link class="login-button" to="/signup"> Sign Up </router-link>
+          </div>
         </div>
-        
+
       </form>
 
     </div>
@@ -76,20 +71,24 @@ export default {
   margin: 5px;
   border-radius: 50px;
 }
+
 .login:hover {
   background: rgba(78, 140, 255, 0.801);
   transition: 0.5s ease-in-out;
 }
+
 .logo-home {
   display: block;
   height: 200px;
 }
+
 .login-button {
   height: 20px;
   align-items: center;
   font-weight: 600;
   padding-top: 5px;
 }
+
 .login-button:hover {
   font-size: 15px;
   display: flex;
@@ -107,6 +106,7 @@ export default {
 .field-button {
   align-items: center;
 }
+
 .button {
   width: 300px;
   height: 50px;
@@ -115,40 +115,48 @@ export default {
   justify-content: center;
   background: rgba(78, 140, 255, 0.301);
 }
+
 .button:hover {
   background: rgba(78, 140, 255, 0.801);
   transition: 0.5s ease-in-out;
 }
+
 .input {
   margin-top: 13px;
   padding-left: 10px;
   border-radius: 15px;
   height: 30px;
 }
+
 .input::placeholder {
   text-align: center;
 }
+
 .course-information {
   display: flex;
   flex-direction: column;
   padding: 5% 0 0 30%;
 }
+
 .textarea {
   height: 200px;
   width: 400px;
 }
+
 .field {
   display: flex;
   flex-direction: column;
   width: 80vh;
   margin: 15px;
 }
+
 textarea {
   display: block;
   resize: none;
   width: 20%;
   height: 50%;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
