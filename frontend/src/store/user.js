@@ -92,8 +92,9 @@ const user = {
         async [actions.SING_UP](_, singup){
            await axios.post('/users', singup)
         },
-        async [actions.RESET_PASSWORD](_, password) {
-            await axios.post("/users/reset-password", {email: password})
+        async [actions.RESET_PASSWORD](_, email) {
+           const a =  await axios.post("/users/reset-password", {email})
+           console.log(a)
         },
         async [actions.FIND_USER]({commit}, id){
             const findUser = await axios.get(`/users/${id}`)

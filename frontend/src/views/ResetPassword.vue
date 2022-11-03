@@ -1,5 +1,6 @@
 <script>
 import {mapActions} from "vuex"
+import { notification } from 'ant-design-vue';
 
 export default {
   name:"ResetPassword",
@@ -10,9 +11,10 @@ export default {
   },
   methods: {
     ...mapActions("user",["resetPassword"]),
-
-    resetPassword() {
+    handleResetPassword() {
       this.resetPassword(this.email)
+      this.$router.push("/login")
+      notification.success({ message: 'New Password Send To Email' })
     }
   } 
 }
@@ -29,7 +31,7 @@ export default {
 
 
       <div class="field field-button" >
-        <button class="button" type="submit"  @click="resetPassword">Reset Password</button >
+        <button class="button" type="submit"  @click="handleResetPassword">Reset Password</button >
       </div>
     </div>
   </div>
