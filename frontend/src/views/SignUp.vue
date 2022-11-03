@@ -16,37 +16,38 @@ export default {
   },
   methods: {
     ...mapActions("user", ["singUp"]),
-    formValidate(){
-      if(!this.userinfo.full_name){
-        notification.error({message: 'You Must Enter Name'})
-        return
+    formValidate() {
+      if (!this.userinfo.full_name) {
+        notification.error({ message: 'You Must Enter Name' })
+        return false
       }
-      if(!this.userinfo.email){
-        notification.error({message: 'You Must Enter Email'})
-        return
+      if (!this.userinfo.email) {
+        notification.error({ message: 'You Must Enter Email' })
+        return false
       }
-      if(this.userinfo.password.length < 8){
-        notification.error({message: 'Password Must be More Than 8 Characters'})
-        return
+      if (this.userinfo.password.length < 8) {
+        notification.error({ message: 'Password Must be More Than 8 Characters' })
+        return false
       }
-      if(!this.userinfo.profession){
-        notification.error({message: 'You Must Enter Profession'})
-        return
+      if (!this.userinfo.profession) {
+        notification.error({ message: 'You Must Enter Profession' })
+        return false
       }
-      if(!this.userinfo.about){
-        notification.error({message: 'You Must Enter About'})
-        return
+      if (!this.userinfo.about) {
+        notification.error({ message: 'You Must Enter About' })
+        return false
       }
-      return 
+      return true
     },
     async submitSingnUp() {
-      if(this.formValidate()) {
+      console.log(this.formValidate())
+      if (this.formValidate()) {
         try {
-        await this.singUp(this.userinfo)
-        this.$router.push("/login")
-      } catch (error) {
-        console.log(error);
-      }
+          await this.singUp(this.userinfo)
+          this.$router.push("/login")
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
@@ -69,31 +70,17 @@ export default {
 
       <div class="field password">
         <label for="password">Password</label>
-        <input
-          class="input"
-          type="password"
-          key="password"
-          v-model="userinfo.password"
-        />
+        <input class="input" type="password" key="password" v-model="userinfo.password" />
       </div>
 
       <div class="field profession">
         <label for="profession">Profession</label>
-        <input
-          class="input"
-          type="text"
-          key="profession"
-          v-model="userinfo.profession"
-        />
+        <input class="input" type="text" key="profession" v-model="userinfo.profession" />
       </div>
 
       <br />
       <div class="description field">
-        <textarea
-          class="textarea"
-          placeholder="Write About Yourself"
-          v-model="userinfo.about"
-        >
+        <textarea class="textarea" placeholder="Write About Yourself" v-model="userinfo.about">
         </textarea>
       </div>
       <div class="field field-button">
@@ -102,9 +89,9 @@ export default {
         </button>
 
         <div class="login">
-        Already have an account ?
-        <router-link class="login-button" to="/login"> Sign in </router-link>
-      </div>
+          Already have an account ?
+          <router-link class="login-button" to="/login"> Sign in </router-link>
+        </div>
       </div>
 
 
@@ -123,20 +110,24 @@ export default {
   margin: 5px;
   border-radius: 50px;
 }
+
 .login:hover {
   background: rgba(78, 140, 255, 0.801);
   transition: 0.5s ease-in-out;
 }
+
 .logo-home {
   display: block;
   height: 200px;
 }
+
 .login-button {
   height: 20px;
   align-items: center;
   font-weight: 600;
   padding-top: 5px;
 }
+
 .login-button:hover {
   font-size: 15px;
   display: flex;
@@ -154,6 +145,7 @@ export default {
 .field-button {
   align-items: center;
 }
+
 .button {
   width: 300px;
   height: 50px;
@@ -162,40 +154,48 @@ export default {
   justify-content: center;
   background: rgba(78, 140, 255, 0.301);
 }
+
 .button:hover {
   background: rgba(78, 140, 255, 0.801);
   transition: 0.5s ease-in-out;
 }
+
 .input {
   margin-top: 13px;
   padding-left: 10px;
   border-radius: 15px;
   height: 30px;
 }
+
 .input::placeholder {
   text-align: center;
 }
+
 .course-information {
   display: flex;
   flex-direction: column;
   padding: 5% 0 0 30%;
 }
+
 .textarea {
   height: 200px;
   width: 400px;
 }
+
 .field {
   display: flex;
   flex-direction: column;
   width: 80vh;
   margin: 15px;
 }
+
 textarea {
   display: block;
   resize: none;
   width: 20%;
   height: 50%;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
