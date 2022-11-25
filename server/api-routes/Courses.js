@@ -11,6 +11,9 @@ router.route("/").post(authenticate, CourseController.create)
 router.route("/:id").patch(authenticate, validate(schemas.updateValidation), CourseController.update)
 router.route("/:id").delete(authenticate, CourseController.deleteCourse)
 
+router.route("/ownCourses/:id").get( CourseController.ownCourses)
+router.route("/ownLearnings/:id").get( CourseController.ownLearnings)
+
 router.route("/:id").get( CourseController.findOne)
 router.route("/:id/members").get(authenticate, CourseController.membersList)
 

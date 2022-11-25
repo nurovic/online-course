@@ -18,16 +18,48 @@ class Course {
         req.body.user_id = req.user
         const result =  await cloudinary.uploader.upload(req.files.cover.tempFilePath,  {resource_type : "image", folder:`${req.body.user_id.full_name}/movie/cover`})
         
-        CourseService.create({course_name: req.body.course_name, file: req.body.file, price: req.body.price, description: req.body.description, category: req.body.category, level:req.body.level, cover:result.secure_url, cover_cloudinary_id: result.public_id, user_id:req.body.user_id },{ new: true })
-            .then((response) => {
-                res.status(httpStatus.CREATED).send(response)
-                CategoryService.update({ _id: req.body.category }, { $push: { course: response._id } }).then()
-                LevelService.update({ _id: req.body.level }, { $push: { course: response._id } }).then()
-                UserService.update({_id: req.user._id }, {$push: {created_courses: response._id}}).then()
-            })
-            .catch((e) => {
-                res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e)
-            })
+        CourseService.create(
+          {
+            course_name: req.body.course_name,
+            file: req.body.file,
+            price: req.body.price,
+            description: req.body.description,
+            category: req.body.category,
+            level: req.body.level,
+            cover: result.secure_url,
+            cover_cloudinary_id: result.public_id,
+            user_id: req.body.user_id,
+          },
+          { new: true }
+        )
+          .then((response) => {
+            res.status(httpStatus.CREATED).send(response);
+            CategoryService.update(
+              { _id: req.body.category },
+              { $push: { course: response._id } }
+            ).then();
+            LevelService.update(
+              { _id: req.body.level },
+              { $push: { course: response._id } }
+            ).then();
+            UserService.update(
+              { _id: req.user._id },
+              { $push: { created_courses: response._id } }
+            ).then();
+          })
+          .catch((e) => {
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(e);
+          });
+    }
+
+    async ownCourses (req, res) {
+        const user = await UserService.findOne({_id:req.params.id})
+        res.send(user.created_courses)
+    }
+
+    async ownLearnings (req, res) {
+        const user = await UserService.findOne({_id:req.params.id})
+        res.send(user.learnings)
     }
 
     findOne(req, res) {
@@ -72,24 +104,8 @@ class Course {
     async deleteCourse(req, res) {
         if (!req.params?.id) { return res.status(httpStatus.BAD_REQUEST).send({ message: "ID information is missing for Delete" }) }
 
-        let levelArray = await CourseService.findOne({ _id: req.params.id }).then((crs) => { return crs.level.course }) // course array
-        let arrayLevel = levelArray.find(element => element == req.params.id).toString() // find id which equal req.params.id within course array
-        let deleteLevel = await CourseService.findOne({ _id: req.params.id }).then(response => { return response.level._id }) // find which level in CourseService
-        let findLevel = await LevelService.findOne({ _id: deleteLevel }).then(d => { // find level id in LevelService
-            return d.course.find(selected => selected._id = arrayLevel)
-        }) // find course which selected
 
-        LevelService.update({ _id: deleteLevel }, { $pull: { course: findLevel } }).then() // delete course which level course array
-
-        let courseArray = await CourseService.findOne({ _id: req.params.id }).then((ctg) => { return ctg.category.course })
-        let arrayCourse = courseArray.find(element => element == req.params.id).toString()
-        let deleteCategory = await CourseService.findOne({ _id: req.params.id }).then(response => { return response.category._id })
-        let findCategory = await CategoryService.findOne({ _id: deleteCategory }).then(category => {
-            return category.course.find(selected => selected._id = arrayCourse)
-        })
-        CategoryService.update({ _id: deleteCategory }, { $pull: { course: findCategory } }).then()
-
-        await CourseService.delete(req.params?.id)
+        await CourseService.deleteAll({ _id: { $in: req.params?.id} })
             .then((deleteCourse) => {
                 if (!deleteCourse) { return res.status(httpStatus.NOT_FOUND).send({ message: "This course not found" }) }
                 res.status(httpStatus.OK).send({ message: "Course Deleted" })
