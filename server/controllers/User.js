@@ -18,6 +18,10 @@ class User {
     }).catch((e) => res.status(httpStatus.INTERNAL_SERVER_ERROR).send({message:e}))
   }
   create(req, res) {
+    const check = UserService.findOne({_id: req.body.email})
+    if(check) {
+      return res.send("This Email is Registered.")
+    }
     req.body.password = passwordToHash(req.body.password);
     UserService.create(req.body)
       .then((response) => {
