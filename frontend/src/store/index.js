@@ -9,7 +9,7 @@ import movies from './movies'
 import levels from './levels'
 import order from './order'
 
-axios.defaults.baseURL = 'https://c-dev.onrender.com'
+axios.defaults.baseURL = 'https://online-course-production.up.railway.app'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
