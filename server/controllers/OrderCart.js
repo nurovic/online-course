@@ -32,7 +32,7 @@ class OrderCart {
       { _id: req.user._id },
       { $push: { learnings: course_id } }
     ).then();
-
+      console.log("haasdasd", course_id.length)
     for (let i = 0; i < course_id.length; i++) {
       const userId = req.user._id
             CourseService.update(
