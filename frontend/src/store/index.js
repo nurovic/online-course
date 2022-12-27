@@ -9,7 +9,7 @@ import movies from './movies'
 import levels from './levels'
 import order from './order'
 
-axios.defaults.baseURL = 'https://deploy-vcourse.herokuapp.com'
+axios.defaults.baseURL = 'https://c-dev.onrender.com'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
